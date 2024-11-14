@@ -1,0 +1,53 @@
+# Bitrix core
+/bitrix/
+
+# Bitrix system files
+/upload/
+/local/tmp/
+/local/php_interface/dbconn.php
+
+# Cache directories
+/local/cache/
+/local/managed_cache/
+/bitrix/cache/
+/bitrix/managed_cache/
+/bitrix/stack_cache/
+
+# Logs
+/local/logs/
+*.log
+
+# Backups
+/bitrix/backup/
+*.bak
+*.gz
+*.tar
+*.zip
+
+# Config files
+.settings.php
+.settings_extra.php
+php_interface/dbconn.php
+
+# IDE specific files
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# OS specific files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Node modules if you use frontend build tools
+/node_modules/
+/local/node_modules/
+
+# Environment files
+.env
+.env.local
