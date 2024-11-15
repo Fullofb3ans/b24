@@ -160,22 +160,6 @@ $arUrlRewrite=array (
     'PATH' => '/pub/payment_slip.php',
     'SORT' => 100,
   ),
-  136 => 
-  array (
-    'CONDITION' => '#^/extranet/workgroups/create/#',
-    'RULE' => NULL,
-    'ID' => 'bitrix:extranet.group_create',
-    'PATH' => '/extranet/workgroups/create/index.php',
-    'SORT' => 100,
-  ),
-  137 => 
-  array (
-    'CONDITION' => '#^/extranet/contacts/personal/#',
-    'RULE' => NULL,
-    'ID' => 'bitrix:socialnetwork_user',
-    'PATH' => '/extranet/contacts/personal.php',
-    'SORT' => 100,
-  ),
   6 => 
   array (
     'CONDITION' => '#^/stssync/contacts_extranet/#',
@@ -246,14 +230,6 @@ $arUrlRewrite=array (
     'RULE' => '',
     'ID' => 'bitrix:crm.config.productprops',
     'PATH' => '/crm/configs/productprops/index.php',
-    'SORT' => 100,
-  ),
-  139 => 
-  array (
-    'CONDITION' => '#^/extranet/marketplace/app/#',
-    'RULE' => NULL,
-    'ID' => 'bitrix:app.layout',
-    'PATH' => '/extranet/marketplace/app/index.php',
     'SORT' => 100,
   ),
   26 => 
@@ -360,14 +336,6 @@ $arUrlRewrite=array (
     'PATH' => '/marketing/config/role.php',
     'SORT' => 100,
   ),
-  140 => 
-  array (
-    'CONDITION' => '#^/extranet/mobile/webdav#',
-    'RULE' => NULL,
-    'ID' => 'bitrix:mobile.webdav.file.list',
-    'PATH' => '/extranet/mobile/webdav/index.php',
-    'SORT' => 100,
-  ),
   2 => 
   array (
     'CONDITION' => '#^/stssync/contacts_crm/#',
@@ -384,14 +352,6 @@ $arUrlRewrite=array (
     'PATH' => '/crm/configs/currency/index.php',
     'SORT' => 100,
   ),
-  138 => 
-  array (
-    'CONDITION' => '#^/extranet/marketplace/#',
-    'RULE' => NULL,
-    'ID' => 'bitrix:rest.marketplace',
-    'PATH' => '/extranet/marketplace/index.php',
-    'SORT' => 100,
-  ),
   112 => 
   array (
     'CONDITION' => '#^/crm/configs/measure/#',
@@ -406,14 +366,6 @@ $arUrlRewrite=array (
     'RULE' => '',
     'ID' => '',
     'PATH' => '/marketing/blacklist.php',
-    'SORT' => 100,
-  ),
-  135 => 
-  array (
-    'CONDITION' => '#^/extranet/workgroups/#',
-    'RULE' => NULL,
-    'ID' => 'bitrix:socialnetwork_group',
-    'PATH' => '/extranet/workgroups/index.php',
     'SORT' => 100,
   ),
   99 => 
