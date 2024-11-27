@@ -1,14 +1,10 @@
 <?php 
-
-// use Bitrix\iblock\iblock;
-// Loader::includeModule('iblock');
-
 require $_SERVER['DOCUMENT_ROOT'] . '/bitrix/header.php';
 
 $APPLICATION -> setTitle('Тест пейдж');
 
-$iblockId = 16;
-$iblockElementId = 29;
+$iblockId = 17;
+$iblockElementId = 65;
 
 $arFilter = ['IBLOCK_ID' => $iblockId, 'ACTIVE'=> 'Y'];
 $arSelect = ['ID', 'NAME', 'CODE', 'PROPERTY_MODEL'];
