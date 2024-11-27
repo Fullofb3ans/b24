@@ -6,13 +6,14 @@ $APPLICATION -> setTitle('Тест пейдж');
 use Bitrix\Iblock\Iblock;
 
 $iblockId = 17;
-$iblockElementId = 65;
+$iblockElementId = 30;
 
 $iblock = Iblock::wakeUp($iblockId);
-$element = $iblock -> getEntityDataClass()::getByPrimary($iblockElementUd)->fetchObject();
+$element = $iblock -> getEntityDataClass()::getByPrimary($iblockElementId)->fetchObject();
 
-pr($element);
+$name = $element->get('NAME');
 
+pr($name);
 
 require $_SERVER['DOCUMENT_ROOT'] . '/bitrix/footer.php';
 
