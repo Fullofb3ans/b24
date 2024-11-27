@@ -6,14 +6,10 @@ $APPLICATION -> setTitle('Тест пейдж');
 $iblockId = 17;
 $iblockElementId = 65;
 
-$arFilter = ['IBLOCK_ID' => $iblockId, 'ACTIVE'=> 'Y'];
-$arSelect = ['ID', 'NAME', 'CODE', 'PROPERTY_MODEL'];
+$iblock = iblock::wakeUp($iblockId);
+$element = $iblock -> getEntityDataClass()::getByPrimary($iblockElementUd)->fetchObject();
 
-$res = CIBlockElement::getList([], $arfilter, false, [], $arSelect);
-while($arFields = $res-> fetch())
-{
-    pr($arFields);
-}
+pr($element);
 
 
 require $_SERVER['DOCUMENT_ROOT'] . '/bitrix/footer.php';
