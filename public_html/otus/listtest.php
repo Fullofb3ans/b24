@@ -1,7 +1,7 @@
 <?php 
 
-use Bitrix\iblock\iblock;
-Loader::includeModule('iblock');
+// use Bitrix\iblock\iblock;
+// Loader::includeModule('iblock');
 
 require $_SERVER['DOCUMENT_ROOT'] . '/bitrix/header.php';
 
