@@ -7,7 +7,7 @@ use Models\AbstractIblockPropertyValuesTable;
 
 class DocsPropertyValuesTable extends AbstractIblockPropertyValuesTable
 {
-    public const IBLOCK_ID = 16;
+    public const IBLOCK_ID = 17;
 
     public static function getMap(): array
     {
