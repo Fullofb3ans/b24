@@ -10,13 +10,16 @@ echo '<h1>Врачи</h1>';
 
 use Models\Lists\DocsPropertyValuesTable as DocsTable;
 
-$docs = DocsTable::getList([      
+$docs = DocsTable::getList(
+    [      
 		'select'=>[
-          'ID'=>'IBLOCK_ELEMENT_ID',
-          'NAME'=>'ELEMENT.NAME',
- 		  'PRODCEDURY_ID'=>'PRODCEDURY_ID'
-      ]
-  ])->fetchAll();
+            'ID'=>'IBLOCK_ELEMENT_ID',
+            'NAME'=>'ELEMENT.NAME',
+             'POST'=>'POST',
+             'PROCEDURA'=>'PROCEDURA'
+        ]
+  ]
+  )->fetchAll();
 
  pr($docs);
 
