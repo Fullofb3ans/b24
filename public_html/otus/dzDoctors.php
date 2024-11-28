@@ -21,8 +21,8 @@ $docs = DocsTable::getList(
   ]
   )->fetchAll();
 
-foreach $docs as $doc {
-    echo `<h1>$doc['NAME']</h1>`;
+  foreach ($docs as $doc) {
+    echo "<h1>{$doc['NAME']}</h1>";
 }
 
 pr($docs[0]['PROCEDURA']);
