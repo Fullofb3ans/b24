@@ -12,8 +12,8 @@ class DocsPropertyValuesTable extends AbstractIblockPropertyValuesTable
     public static function getMap(): array
     {
         $map = [
-            'PROTSEDURY' => new ReferenceField(
-                'PROTSEDURY', 
+            'PROCEDURA' => new ReferenceField(
+                'PROCEDURA', 
                 DocsProcedurePropertyValuesTable::class, 
                 ['=this.PROCEDURA' => 'ref.IBLOCK_ELEMENT_ID']
             )
