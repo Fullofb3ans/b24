@@ -5,7 +5,7 @@ namespace Models\Lists;
 use Bitrix\Main\Entity\ReferenceField;
 use Models\AbstractIblockPropertyValuesTable;
 
-class CarsPropertyValuesTable extends AbstractIblockPropertyValuesTable
+class DocsPropertyValuesTable extends AbstractIblockPropertyValuesTable
 {
     public const IBLOCK_ID = 16;
 
@@ -14,8 +14,8 @@ class CarsPropertyValuesTable extends AbstractIblockPropertyValuesTable
         $map = [
             'PROTSEDURY' => new ReferenceField(
                 'PROTSEDURY', 
-                CarCityPropertyValuesTable::class, 
-                ['=this.CITY_ID' => 'ref.IBLOCK_ELEMENT_ID']
+                DocsProcedurePropertyValuesTable::class, 
+                ['=this.PROCEDURE_ID' => 'ref.IBLOCK_ELEMENT_ID']
             )
         ];
 

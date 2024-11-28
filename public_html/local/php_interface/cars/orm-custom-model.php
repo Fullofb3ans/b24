@@ -3,10 +3,10 @@ require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 
 $APPLICATION->SetTitle('Вывод связанных полей');
 
-use Models\Lists\CarsPropertyValuesTable as CarsTable;
+use Models\Lists\DocsPropertyValuesTable as DocsTable;
 
 // вывод данных по списку записей из инфоблока Автомобили
-$cars = CarsTable::getList([      
+$docs = DocsTable::getList([      
 		'select'=>[
           'ID'=>'IBLOCK_ELEMENT_ID',
           'NAME'=>'ELEMENT.NAME',
@@ -14,7 +14,7 @@ $cars = CarsTable::getList([
       ]
   ])->fetchAll();
 
- pr($cars);
+ pr($docs);
 
 /*$cars = CarsTable::query()
     ->setSelect([

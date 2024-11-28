@@ -2,38 +2,22 @@
 
 require $_SERVER['DOCUMENT_ROOT'] . '/bitrix/header.php';
 
+$APPLICATION->SetTitle('Вывод связанных полей');
+
+
 echo '<h1>Врачи</h1>';
 
-use Bitrix\Iblock\Iblock;
+use Models\Lists\DocsPropertyValuesTable as DocsTable;
 
-function printDoctors(){
-    $iblockId = 16;
-    $elements = \Bitrix\Iblock\Elements\ElementdocsTable::query()
-->addSelect('NAME')
-->setFilter(array('=IBLOCK_ID' => $iblockId))
--> fetchCollection();
+$docs = DocsTable::getList([      
+		'select'=>[
+          'ID'=>'IBLOCK_ELEMENT_ID',
+          'NAME'=>'ELEMENT.NAME',
+ 		  'MANUFACTURER_ID'=>'MANUFACTURER_ID'
+      ]
+  ])->fetchAll();
 
-foreach($elements as $element){
-pr($element->getName());
-};
-}
-
-printDoctors();
-
-function printProdcedures(){
-    $iblockId = 17;
-    $elements = \Bitrix\Iblock\Elements\ElementprocTable::query()
-->addSelect('NAME')
-->setFilter(array('=IBLOCK_ID' => $iblockId))
--> fetchCollection();
-
-foreach($elements as $element){
-pr($element->getName());
-};
-}
-
-printProdcedures();
-
+ pr($docs);
 
 
 require $_SERVER['DOCUMENT_ROOT'] . '/bitrix/footer.php';
