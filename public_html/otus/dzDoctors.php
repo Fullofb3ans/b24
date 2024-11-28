@@ -19,28 +19,8 @@ $docs = DocsTable::getList([
 ])->fetchAll();
 
   foreach ($docs as $doc) {
-    echo "<h1>{$doc['NAME']}</h1>";
+    echo "<div><h1>{$doc['NAME']}</h1><h2>{$doc['PROCEDURA_NAME']}}</h2></div>";
 }
-
-pr($docs[0]['PROCEDURA']);
-
-// use Models\Lists\DocsPropertyValuesTable as DocsTable;
-
-// $docs = DocsTable::getList(
-//     [      
-// 		'select'=>[
-//           'ID'=>'IBLOCK_ELEMENT_ID',
-//           'NAME'=>'ELEMENT.NAME',
-//  		  'POST'=>'POST',
-// 			'PROCEDURA_NAME'=>'PROCEDURA.ELEMENT.NAME'
-//       ],
-
-//   ]
-//   )->fetchAll();
-
-
-// pr($docs);
-
 
 
 require $_SERVER['DOCUMENT_ROOT'] . '/bitrix/footer.php';
