@@ -1,6 +1,7 @@
 <?php 
 
 require $_SERVER['DOCUMENT_ROOT'] . '/bitrix/header.php';
+require_once($_SERVER['DOCUMENT_ROOT'].'/bitrix/php_interface/Models/Lists/DocsPropertyValuesTable.php');
 
 $APPLICATION->SetTitle('Вывод связанных полей');
 
