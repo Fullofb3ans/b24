@@ -14,7 +14,7 @@ $docs = DocsTable::getList([
 		'select'=>[
           'ID'=>'IBLOCK_ELEMENT_ID',
           'NAME'=>'ELEMENT.NAME',
- 		  'MANUFACTURER_ID'=>'MANUFACTURER_ID'
+ 		  'PRODCEDURY_ID'=>'PRODCEDURY_ID'
       ]
   ])->fetchAll();
 
