@@ -15,6 +15,19 @@ $name = $element->get('NAME');
 
 pr($name);
 
+
+
+$elements = \Bitrix\Iblock\Elements\ElementDocsTable::query()
+-> addSelect('NAME')
+-> fetchCollection();
+
+foreach($elements as $key => $item){
+
+pr($item->getName());
+
+};
+
+
 require $_SERVER['DOCUMENT_ROOT'] . '/bitrix/footer.php';
 
 ?>
