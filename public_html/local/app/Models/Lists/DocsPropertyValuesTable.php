@@ -15,7 +15,7 @@ class DocsPropertyValuesTable extends AbstractIblockPropertyValuesTable
             'PROTSEDURY' => new ReferenceField(
                 'PROTSEDURY', 
                 DocsProcedurePropertyValuesTable::class, 
-                ['=this.PROCEDURA' => 'ref.PROCEDURA']
+                ['=this.PROCEDURA' => 'ref.IBLOCK_ELEMENT_ID']
             )
         ];
 

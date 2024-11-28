@@ -13,15 +13,19 @@ use Models\Lists\DocsPropertyValuesTable as DocsTable;
 $docs = DocsTable::getList(
     [      
 		'select'=>[
-            'ID'=>'IBLOCK_ELEMENT_ID',
-            'NAME'=>'ELEMENT.NAME',
-             'POST'=>'POST',
-             'PROCEDURA'=>'PROCEDURA'
-        ]
+          'ID'=>'IBLOCK_ELEMENT_ID',
+          'NAME'=>'ELEMENT.NAME',
+ 		  'POST'=>'POST',
+ 		  'PROCEDURA'=>'PROCEDURA'
+      ]
   ]
   )->fetchAll();
 
- pr($docs);
+foreach $docs as $doc {
+    echo `<h1>$doc['NAME']</h1>`;
+}
+
+pr($docs[0]['PROCEDURA']);
 
 
 require $_SERVER['DOCUMENT_ROOT'] . '/bitrix/footer.php';
