@@ -26,11 +26,6 @@ $proceduresAll = \Bitrix\Iblock\Elements\ElementProcTable::query()
         $proceduraList[$procedura->getId()] = $procedura->getName();
     }
 
-    function getProcedureName($id) {
-        return $proceduraList[$id];
-    }
-
-
 foreach ($docs as $doc) {
     echo "<div class='accordion'>
             <details open class='accordion__details'>
@@ -46,7 +41,7 @@ foreach ($docs as $doc) {
                 </summary>";
                 
                 foreach($doc['PROCEDURA_ID'] as $procedura){
-                    echo "<p class='accordion__title'>" . getProcedureName($procedura) . "</p>";
+                    echo "<p class='accordion__title'>". $proceduraList[$procedura] . "</p>";
                 }
                 echo "</details>
                 </div>";
