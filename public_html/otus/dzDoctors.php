@@ -25,7 +25,7 @@ $proceduresAll = \Bitrix\Iblock\Elements\ElementProcTable::query()
     foreach($proceduresAll as $procedura){
         $proceduraList[$procedura->getId()] = $procedura->getName();
     }
-
+echo "<div style='display:flex; flex-direction:row'>";
 foreach ($docs as $doc) {
     echo "<div class='accordion' style='display: flex; justify-content: center; padding: 2%; border: 1px solid #ACB5BD; border-radius: 10px; width: fit-content; margin: auto auto 1% auto; cursor: pointer;'>
     <details open class='accordion__details'>
@@ -40,6 +40,7 @@ foreach ($docs as $doc) {
                 </div>";
 
 }
+echo "</div>";
 
 require $_SERVER['DOCUMENT_ROOT'] . '/bitrix/footer.php';
 ?>
