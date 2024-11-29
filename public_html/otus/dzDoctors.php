@@ -25,11 +25,11 @@ $proceduresAll = \Bitrix\Iblock\Elements\ElementProcTable::query()
     foreach($proceduresAll as $procedura){
         $proceduraList[$procedura->getId()] = $procedura->getName();
     }
-echo "<div style='display:flex; flex-direction:row'>";
+echo "<div style='display:flex; flex-direction:row; align-items:flex-start; justify-content: center; gap:20px;'>";
 foreach ($docs as $doc) {
-    echo "<div class='accordion' style='display: flex; justify-content: center; padding: 2%; border: 1px solid #ACB5BD; border-radius: 10px; width: fit-content; margin: auto auto 1% auto; cursor: pointer;'>
+    echo "<div class='accordion' style='padding: 2%; border: 1px solid #ACB5BD; border-radius: 10px; width: fit-content;'>
     <details open class='accordion__details'>
-                <summary class='accordion__summary'>
+                <summary class='accordion__summary' style='cursor:pointer;'>
                     {$doc['NAME']}
                 </summary>";
                 
