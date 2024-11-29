@@ -27,8 +27,8 @@ $proceduresAll = \Bitrix\Iblock\Elements\ElementProcTable::query()
     }
 
 foreach ($docs as $doc) {
-    echo "<div class='accordion'>
-            <details open class='accordion__details'>
+    echo "<div class='accordion' style=`display: flex;justify-content: center;padding: 2%;border: 1px solid #ACB5BD;border-radius: 10px;width: fit-content;margin: auto auto 1% auto; cursor:pointer;`>
+                <details open class='accordion__details'>
                 <summary class='accordion__summary'>
                     {$doc['NAME']}
                     <svg class='accordion__icon' width='18' height='10' viewBox='0 0 18 10' fill='none' xmlns='http://www.w3.org/2000/svg'>
