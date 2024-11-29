@@ -45,8 +45,8 @@ foreach ($docs as $doc) {
                     </svg>
                 </summary>";
                 
-                foreach($doc['PROCEDURA_NAME'] as $procedura){
-                    echo  "<p class='accordion__title'>{$procedura}</p>";   
+                foreach($doc['PROCEDURA_ID'] as $procedura){
+                    echo "<p class='accordion__title'>" . getProcedureName($procedura) . "</p>";
                 }
                 echo "</details>
                 </div>";
