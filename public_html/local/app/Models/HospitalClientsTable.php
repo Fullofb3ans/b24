@@ -76,6 +76,8 @@ class HospitalClientsTable extends DataManager
 					[]
 				))->configureTitle(Loc::getMessage('CLIENTS_ENTITY_CONTACT_ID_FIELD'))
 			,
+			(new Reference('CONTACT', \Bitrix\CRM\ContactTable::class, join::on('this.contact_id', 'ref.ID'))
+			)->configureJoinType('inner'),
 		];
 	}
 }
