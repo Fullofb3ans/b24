@@ -10,7 +10,7 @@ use Bitrix\Iblock\Iblock;
 use Models\HospitalClientsTable as Clients;
 
 $collection = Clients::getList([
-    'select' => ['*'],
+    'select' => ['*', 'CONTACT.COMPANY_ID'],
     'filter' => ['=ID' => 1],
 ])->fetchCollection();
 
