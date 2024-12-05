@@ -17,7 +17,7 @@ $collection = Clients::getList([
 foreach($collection as $key => $item){
     pr($item->getContactId());
     pr($item->getFirstName());
-    pr($item->getContact()->getCompanyId());
+    pr($item->getContact());
 }
 
 require $_SERVER['DOCUMENT_ROOT'] . '/bitrix/footer.php';
