@@ -88,7 +88,7 @@ class HospitalClientsTable extends DataManager
 			)->configureJoinType('inner'),
 			(new Reference('PROCEDURA', ProcTable::class, join::on('this.procedura_id', 'ref.ID'))
 			)->configureJoinType('inner'),
-			(new Reference('DOCTOR', \Bitrix\CRM\ContactTable::class, join::on('this.doctor_id', 'ref.ID'))
+			(new Reference('DOCTOR', DocsTable::class, join::on('this.doctor_id', 'ref.ID'))
 			)->configureJoinType('inner'),
 		];
 	}

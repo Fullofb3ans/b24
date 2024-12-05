@@ -15,14 +15,14 @@ $APPLICATION -> setTitle('Тест пейдж');
 
 
 $collection = Clients::getList([
-    'select' => ['*', 'CONTACT.COMPANY_ID'],
+    'select' => ['*', 'CONTACT.COMPANY_ID', 'PROCEDURA.PROCEDURA_ID', 'DOCTOR.DOCTOR_ID'],
     'filter' => ['=ID' => 1],
 ])->fetchCollection();
 
 foreach($collection as $key => $item){
     pr($item->getContactId());
     pr($item->getFirstName());
-    pr($item->getContact()->getCompanyId());
+    pr($item->getProcedura()->getProceduraId());
 }
 
 require $_SERVER['DOCUMENT_ROOT'] . '/bitrix/footer.php';
