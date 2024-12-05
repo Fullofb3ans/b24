@@ -14,8 +14,8 @@ $collection = Clients::getList([
     'filter' => ['=ID' => 1],
 ])->fetchCollection();
 
-foreach($collection as $item){
-    pr($item->getId());
+foreach($collection as $key => $item){
+    pr($item->getContactId());
     pr($item->getFirstName());
     pr($item->getContact()->getCompanyId());
 }
