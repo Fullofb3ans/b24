@@ -11,6 +11,7 @@ use Bitrix\Main\ORM\Fields\Validators\LengthValidator;
 use Bitrix\Main\ORM\Fields\Relations\Reference;
 use Bitrix\Main\ORM\Fields\Relations\OneToMany;
 use Bitrix\Main\Entity\Query\Join;
+use Bitrix\CRM\ContactTable;
 
 /**
  * Class ClientsTable
