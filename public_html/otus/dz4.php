@@ -1,5 +1,7 @@
 <?php 
 require $_SERVER['DOCUMENT_ROOT'] . '/bitrix/header.php';
+require_once($_SERVER['DOCUMENT_ROOT'].'/local/app/Models/HospitalClientsTable.php');
+
 
 $APPLICATION -> setTitle('Тест пейдж');
 
