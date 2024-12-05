@@ -1,6 +1,8 @@
 <?php
 namespace Models;
 
+\Bitrix\Main\Loader::includeModule("crm");
+
 use Bitrix\Main\Localization\Loc;
 use Bitrix\Main\ORM\Data\DataManager;
 use Bitrix\Main\ORM\Fields\IntegerField;
