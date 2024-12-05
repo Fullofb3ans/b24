@@ -23,7 +23,7 @@ use Bitrix\Main\ORM\Fields\Validators\LengthValidator;
  * @package Bitrix\Clients
  **/
 
-class ClientsTable extends DataManager
+class HospitalClientsTable extends DataManager
 {
 	/**
 	 * Returns DB table name for entity.
