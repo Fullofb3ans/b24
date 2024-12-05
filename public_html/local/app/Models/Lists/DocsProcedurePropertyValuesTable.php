@@ -7,7 +7,7 @@ use Models\AbstractIblockPropertyValuesTable;
 class DocsProcedurePropertyValuesTable extends AbstractIblockPropertyValuesTable
 {
     const IBLOCK_ID = 17;
-    public static function getMap()
+    public static function getMap(): array
     {
         return array_merge(parent::getMap(), [
             'ID' => [
