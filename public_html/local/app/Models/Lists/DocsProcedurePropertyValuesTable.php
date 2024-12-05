@@ -8,14 +8,17 @@ class DocsProcedurePropertyValuesTable extends AbstractIblockPropertyValuesTable
 {
     const IBLOCK_ID = 17;
 
-    public static function getMap()
+    public static function getMap(): array
     {
-        return array_merge(parent::getMap(), [
-            'ID' => [
-                'data_type' => 'integer',
-                'primary' => true,
-                'autocomplete' => true,
-            ],
-        ]);
+        $map = [
+            'DOCTOR' => new ReferenceField(
+                'DOCTOR', 
+                DocsProcedurePropertyValuesTable::class, 
+                ['=this.DOCTOR_ID' => 'ref.IBLOCK_ELEMENT_ID']
+            )
+        ];
+
+        return parent::getMap() + $map; 
+
     }
 }
