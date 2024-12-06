@@ -9,7 +9,8 @@ use Bitrix\Main\ORM\Fields\IntegerField;
 use Bitrix\Main\ORM\Fields\StringField;
 use Bitrix\Main\ORM\Fields\Validators\LengthValidator;
 use Bitrix\Main\ORM\Fields\Relations\Reference;
-use Bitrix\Main\ORM\Fields\Relations\OneToMany;
+use Bitrix\Main\ORM\Fields\Relations\ManyToMany;
+
 use Bitrix\Main\Entity\Query\Join;
 use Bitrix\CRM\ContactTable;
 use Models\Lists\DocsPropertyValuesTable as DocsTable;
@@ -84,12 +85,18 @@ class HospitalClientsTable extends DataManager
 					[]
 				))->configureTitle(Loc::getMessage('CLIENTS_ENTITY_CONTACT_ID_FIELD'))
 			,
-			(new Reference('CONTACT', \Bitrix\CRM\ContactTable::class, join::on('this.contact_id', 'ref.ID'))
-			)->configureJoinType('inner'),
-			(new Reference('PROCEDURA', ProcTable::class, join::on('this.procedure_id', 'ref.ID'))
-			)->configureJoinType('inner'),
-			(new Reference('DOCTOR', DocsTable::class, join::on('this.doctor_id', 'ref.ID'))
-			)->configureJoinType('inner'),
+'PROCEDURA' => (new Reference(
+    'PROCEDURA',
+    ProcTable::class,
+    ['=this.procedure_id' => 'ref.IBLOCK_ELEMENT_ID'],
+    ['join_type' => 'LEFT']
+)),
+'DOCTORS' => (new Reference(
+    'DOCTORS',
+    DocsTable::class,
+    ['=this.doctor_id' => 'ref.IBLOCK_ELEMENT_ID'],
+    ['join_type' => 'LEFT']
+))
 		];
 	}
 }
