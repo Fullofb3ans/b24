@@ -17,25 +17,7 @@ while ($arCurrency = $rsCurrencies->Fetch())
 }
 
 $arComponentParameters = array(
-    "GROUPS" => array(
-        "LIST"=>array(
-            "NAME"=>GetMessage("GRID_PARAMETERS"),
-            "SORT"=>"300"
-        )
-    ),
     "PARAMETERS" => array(
-        "SHOW_CHECKBOXES" =>  array(
-            "PARENT" => "LIST",
-            "NAME"=>GetMessage("SHOW_ACTION_BTNS"),
-            "TYPE"=>"CHECKBOX",
-            "DEFAULT"=>"N"
-        ),
-        "NUM_PAGE" =>  array(
-            "PARENT" => "LIST",
-            "NAME"=>GetMessage("NUM_PAGE"),
-            "TYPE"=>"STRING",
-            "DEFAULT"=>"20"
-        ),
         "CURRENCY" => array(
             "PARENT" => "LIST",
             "NAME" => "Валюта",
