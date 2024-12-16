@@ -76,7 +76,7 @@ class TableViewsComponent extends \CBitrixComponent
         $offset = $limit * ($page-1);
         $list = [];
         $data = Currency::getList([
-            'select' => ['CURRENCY', 'AMMOUNT'],
+            'select' => ['CURRENCY', 'AMOUNT'],
             'order' => ['ID' => 'ASC'],
             'limit' => $limit,
             'offset' =>$offset

@@ -1,7 +1,7 @@
 <?php
 require $_SERVER['DOCUMENT_ROOT'] . '/bitrix/header.php';
 
-$APPLICATION->setTitle('Тест карточка пациента');
+$APPLICATION->setTitle('Тест валют');
 
 $APPLICATION->IncludeComponent(
     "otus:table.views",
