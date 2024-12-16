@@ -4,14 +4,14 @@ require_once($_SERVER['DOCUMENT_ROOT'].'/local/app/Models/HospitalClientsTable.p
 require_once($_SERVER['DOCUMENT_ROOT'].'/local/app/Models/Lists/DocsPropertyValuesTable.php');
 require_once($_SERVER['DOCUMENT_ROOT'].'/local/app/Models/Lists/DocsProcedurePropertyValuesTable.php');
 
+use Bitrix\Iblock\Iblock;
 use Models\Lists\DocsPropertyValuesTable as DocsTable;
 use Models\Lists\DocsProcedurePropertyValuesTable as ProcTable;
+use Models\HospitalClientsTable as HospitalClientsTable;
 
-use Bitrix\Iblock\Iblock;
 
-use Models\HospitalClientsTable as Clients;
 
-$APPLICATION -> setTitle('Тест карточка пациента');
+$APPLICATION -> setTitle('ТесTт карточка пациента');
 
 
 $result = HospitalClientsTable::getList([
