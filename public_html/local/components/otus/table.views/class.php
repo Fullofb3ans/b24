@@ -77,7 +77,6 @@ class TableViewsComponent extends \CBitrixComponent
         $list = [];
         $data = Currency::getList([
             'select' => ['CURRENCY', 'AMOUNT'],
-            'order' => ['ID' => 'ASC'],
             'limit' => $limit,
             'offset' =>$offset
         ]);
