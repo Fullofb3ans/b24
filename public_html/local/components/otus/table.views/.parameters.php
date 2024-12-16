@@ -13,7 +13,7 @@ $arCurrencies = array();
 $rsCurrencies = CCurrency::GetList(($by="sort"), ($order="asc"));
 while ($arCurrency = $rsCurrencies->Fetch())
 {
-    $arCurrencies[$arCurrency["CURRENCY"]] = "[" . $arCurrency["CURRENCY"] . "] " . $arCurrency["FULL_NAME"];
+    $arCurrency["CURRENCY"];
 }
 
 $arComponentParameters = array(
