@@ -76,6 +76,7 @@ class TableViewsComponent extends \CBitrixComponent
         $list = [];
         $data = Currency::getList([
             'select' => ['CURRENCY', 'AMOUNT'],
+            'filter' => ['=CURRENCY' => $this->arParams['CURRENCY']], 
             'limit' => $limit,
             'offset' =>$offset
         ]);
@@ -83,7 +84,7 @@ class TableViewsComponent extends \CBitrixComponent
         while ($item = $data->fetch()) {
             $list[] = array('data' => $item);
         }
-
+    
         return $list;
     }
 
