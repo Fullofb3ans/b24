@@ -22,7 +22,7 @@ use Bitrix\Main\Context,
 	Bitrix\Main\Engine\Contract\Controllerable,
 	Bitrix\Iblock;
 use Bitrix\Main\Engine\Contract;
-use Models\ClientsTable as Clients;
+use Models\HospitalClientsTable as Clients;
 
 
 
