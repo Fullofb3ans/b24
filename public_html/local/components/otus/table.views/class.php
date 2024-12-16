@@ -72,11 +72,10 @@ class TableViewsComponent extends \CBitrixComponent
 
     private function getList($page = 1, $limit = 1)
     {
-
         $offset = $limit * ($page-1);
         $list = [];
         $data = Currency::getList([
-            'select' => ['CURRENCY', 'AMOUNT'],
+            'select' => ['CURRENCY'=> $this->arParams['CURRENCY'], 'AMOUNT'],
             'limit' => $limit,
             'offset' =>$offset
         ]);
@@ -108,12 +107,6 @@ class TableViewsComponent extends \CBitrixComponent
                 $page = $page[1];
             }else{
                 $page = 1;
-            }
-
-            $this->arResult['SHOW_ROW_CHECKBOXES'] = false;
-
-            if($this->arParams['SHOW_CHECKBOXES'] == 'Y'){
-                $this->arResult['SHOW_ROW_CHECKBOXES'] = true;
             }
 
             $this->arResult['COLUMNS'] = $this->getColumn(); // получаем названия полей таблицы

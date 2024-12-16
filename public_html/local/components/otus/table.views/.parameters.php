@@ -17,6 +17,12 @@ while ($arCurrency = $rsCurrencies->Fetch())
 }
 
 $arComponentParameters = array(
+    "GROUPS" => array(
+        "LIST"=>array(
+            "NAME"=>GetMessage("GRID_PARAMETERS"),
+            "SORT"=>"300"
+        )
+    ),
     "PARAMETERS" => array(
         "CURRENCY" => array(
             "PARENT" => "LIST",
