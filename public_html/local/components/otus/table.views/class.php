@@ -76,7 +76,7 @@ class TableViewsComponent extends \CBitrixComponent
         $offset = $limit * ($page-1);
         $list = [];
         $data = Clients::getList([
-            'select' => ['ID'],
+            'select' => ['ID', 'first_name', 'age', 'doctor_id', 'procedure_id'],
             'order' => ['ID' => 'ASC'],
             'limit' => $limit,
             'offset' =>$offset
