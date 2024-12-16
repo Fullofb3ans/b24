@@ -22,7 +22,7 @@ use Bitrix\Main\Context,
 	Bitrix\Main\Engine\Contract\Controllerable,
 	Bitrix\Iblock;
 use Bitrix\Main\Engine\Contract;
-use Models\HospitalClientsTable as Clients;
+use Bitrix\Currency\CurrencyTable as Currency;
 
 
 
@@ -49,7 +49,7 @@ class TableViewsComponent extends \CBitrixComponent
     */
     private function checkModules()
     {
-        if(!Loader::includeModule('iblock') || !Loader::includeModule('crm')){
+        if(!Loader::includeModule('iblock') || !Loader::includeModule('currency')){
             throw new \Exception("Не загружены модули необходимые для работы компонента");
         }
         return true;
@@ -58,7 +58,7 @@ class TableViewsComponent extends \CBitrixComponent
 
     private function getColumn()
     {
-        $fieldMap = Clients::getMap();
+        $fieldMap = Currency::getMap();
         $columns = [];
         foreach ($fieldMap as $key => $field) {
             $columns[] = array(
@@ -75,8 +75,8 @@ class TableViewsComponent extends \CBitrixComponent
 
         $offset = $limit * ($page-1);
         $list = [];
-        $data = Clients::getList([
-            'select' => ['ID', 'first_name', 'age', 'doctor_id', 'procedure_id'],
+        $data = Currency::getList([
+            'select' => ['CURRENCY', 'AMMOUNT'],
             'order' => ['ID' => 'ASC'],
             'limit' => $limit,
             'offset' =>$offset
@@ -119,7 +119,7 @@ class TableViewsComponent extends \CBitrixComponent
 
             $this->arResult['COLUMNS'] = $this->getColumn(); // получаем названия полей таблицы
             $this->arResult['LISTS'] = $this->getList($page, $this->arParams['NUM_PAGE']); // получаем записи таблицы
-            $this->arResult['COUNT'] =  Clients::getCount(); // количество записей
+            $this->arResult['COUNT'] =  Currency::getCount(); // количество записей
          
 
             // подключаем шаблон
