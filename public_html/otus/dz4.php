@@ -11,7 +11,7 @@ use Models\HospitalClientsTable as HospitalClientsTable;
 
 
 
-$APPLICATION -> setTitle('ТесTт карточка пациента');
+$APPLICATION -> setTitle('Тест карточка пациента');
 
 
 $result = HospitalClientsTable::getList([
