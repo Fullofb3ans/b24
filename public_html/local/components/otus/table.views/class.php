@@ -127,4 +127,4 @@ class TableViewsComponent extends \CBitrixComponent
     }
 
 
-} 
+}
