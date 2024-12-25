@@ -6,7 +6,7 @@ use Bitrix\Main\EventManager;
 
 Loc::loadMessages(__FILE__);
 
-class otus_homework extends CModule
+class otus_dz extends CModule
 {
     public $MODULE_ID = 'otus.dz6';
     public $MODULE_VERSION;
