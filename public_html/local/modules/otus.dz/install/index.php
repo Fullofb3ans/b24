@@ -8,7 +8,7 @@ Loc::loadMessages(__FILE__);
 
 class otus_dz extends CModule
 {
-    public $MODULE_ID = 'otus.dz6';
+    public $MODULE_ID = 'otus.dz';
     public $MODULE_VERSION;
     public $MODULE_VERSION_DATE;
     public $MODULE_NAME;
