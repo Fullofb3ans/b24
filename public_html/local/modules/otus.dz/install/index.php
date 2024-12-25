@@ -198,7 +198,7 @@ class otus_dz extends CModule
             'crm',
             'onEntityDetailsTabsInitialized',
             $this->MODULE_ID,
-            '\\Otus\\Homework\\Crm\\Handlers',
+            '\\Otus\\Dz\\Crm\\Handlers',
             'updateTabs'
         );
 
