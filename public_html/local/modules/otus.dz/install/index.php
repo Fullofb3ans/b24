@@ -20,11 +20,11 @@ class otus_dz extends CModule
         include(__DIR__ . '/version.php');
         $this->MODULE_VERSION = $arModuleVersion['VERSION'];
         $this->MODULE_VERSION_DATE = $arModuleVersion['VERSION_DATE'];
-        $this->MODULE_NAME = Loc::getMessage('OTUS_VACATION_MODULE_NAME');
-        $this->MODULE_DESCRIPTION = Loc::getMessage('OTUS_VACATION_MODULE_DESC');
+        $this->MODULE_NAME = "otus.dz";
+        $this->MODULE_DESCRIPTION = "Домащнее задание №6";
 
-        $this->PARTNER_NAME = Loc::getMessage('OTUS_VACATION_PARTNER_NAME');
-        $this->PARTNER_URI = Loc::getMessage('OTUS_VACATION_PARTNER_URI');
+        $this->PARTNER_NAME = "Fullofb3ans";
+        $this->PARTNER_URI = "https://github.com/Fullofb3ans";
     }
 
     public function isVersionD7()
