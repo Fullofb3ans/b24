@@ -1,5 +1,5 @@
 <?php
-namespace Otus\Homework\Crm;
+namespace Otus\Dz\Crm;
 
 use Bitrix\Main\Event;
 use Bitrix\Main\EventResult;
