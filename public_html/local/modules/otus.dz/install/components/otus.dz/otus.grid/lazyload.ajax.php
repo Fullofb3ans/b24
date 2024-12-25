@@ -29,7 +29,7 @@ if (!CModule::IncludeModule('crm') || !CCrmSecurityHelper::IsAuthorized() || !ch
 $dealId = (int)Application::getInstance()->getContext()->getRequest()->get('dealId');
 
 $APPLICATION->IncludeComponent(
-    'otus.homework:otus.grid',
+    'otus.dz:otus.grid',
     '.default',
     [
         'dealId' => $dealId,
