@@ -20,7 +20,7 @@ class Handlers
             'id' => 'test',
             'name' => 'Тестовая вкладка',
             'loader' => [
-                'serviceUrl' => '/bitrix/components/otus.homework/otus.grid/lazyload.ajax.php?&site=' . \SITE_ID . '&' . \bitrix_sessid_get(),
+                'serviceUrl' => '/bitrix/components/otus.dz/otus.grid/lazyload.ajax.php?&site=' . \SITE_ID . '&' . \bitrix_sessid_get(),
                 'componentData' => [
                     'template' => '',
                     'params' => [
