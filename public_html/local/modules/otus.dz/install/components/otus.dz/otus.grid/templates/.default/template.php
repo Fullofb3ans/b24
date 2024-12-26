@@ -19,6 +19,8 @@ $nav->setRecordCount($arResult['COUNT']);
 ?>
 
 <?
+echo '<h1>test</h1>';
+
 $APPLICATION->IncludeComponent(
     "otus:table.views",
     "list",
