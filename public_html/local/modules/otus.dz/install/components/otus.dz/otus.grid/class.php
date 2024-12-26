@@ -76,29 +76,27 @@ class TableViewsComponent extends \CBitrixComponent implements Controllerable
         return $list;
     }
 
-
     public function executeComponent() {
-        try
-        {
+        try {
             $this->checkModules();
             $this->request = Application::getInstance()->getContext()->getRequest();
-
-            if(isset($this->request['report_list'])){
-                $page = explode('page-', $this->request['report_list']);
-                $page = $page[1];
-            }else{
-                $page = 1;
-            }
-
-            $this->arResult['COLUMNS'] = $this->getColumn();
-            $this->arResult['LISTS'] = $this->getList($page, $this->arParams['NUM_PAGE']);
-            $this->arResult['COUNT'] = HospitalClientsTable::getCount();
-
+    
+            // Debug output
+            echo '<pre>';
+            print_r($this->arResult['GRID_DATA']);
+            echo '</pre>';
+    
+            // Or using Bitrix debug
+            \Bitrix\Main\Diag\Debug::dump($this->arResult['GRID_DATA']);
+            
+            // Or write to log file
+            \Bitrix\Main\Diag\Debug::writeToFile($this->arResult['GRID_DATA'], "Grid Data Check", "__myfolder/log.txt");
+    
             $this->IncludeComponentTemplate();
         }
-        catch (SystemException $e)
-        {
+        catch (SystemException $e) {
             ShowError($e->getMessage());
         }
     }
+
 }
