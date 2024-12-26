@@ -81,16 +81,22 @@ class TableViewsComponent extends \CBitrixComponent implements Controllerable
             $this->checkModules();
             $this->request = Application::getInstance()->getContext()->getRequest();
     
-            // Debug output
+            // Set required grid parameters
+            $this->arResult['GRID_DATA'] = [
+                'GRID_ID' => 'bitrix_example_grid',
+                'COLUMNS' => [
+                    ['id' => 'ID', 'name' => 'ID', 'sort' => 'ID', 'default' => true],
+                    ['id' => 'NAME', 'name' => 'Name', 'sort' => 'NAME', 'default' => true],
+                    ['id' => 'AGE', 'name' => 'Age', 'sort' => 'AGE', 'default' => true],
+                ],
+                'ROWS' => [
+                    ['data' => ['ID' => 1, 'NAME' => 'Test Name', 'AGE' => 25]]
+                ]
+            ];
+    
             echo '<pre>';
             print_r($this->arResult['GRID_DATA']);
             echo '</pre>';
-    
-            // Or using Bitrix debug
-            \Bitrix\Main\Diag\Debug::dump($this->arResult['GRID_DATA']);
-            
-            // Or write to log file
-            \Bitrix\Main\Diag\Debug::writeToFile($this->arResult['GRID_DATA'], "Grid Data Check", "__myfolder/log.txt");
     
             $this->IncludeComponentTemplate();
         }
