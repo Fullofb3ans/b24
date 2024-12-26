@@ -67,8 +67,8 @@ class TableViewsComponent extends \CBitrixComponent implements Controllerable
             $list[] = [
                 'data' => [
                     'ID' => $item->getId(),
-                    'PROCEDURA_NAME' => $item->get('PROCEDURA_NAME'),
-                    'DOCTORS_NAME' => $item->get('DOCTORS_NAME'),
+                    'PROCEDURA_NAME' => $item->getProcedura()->getElement()->getName(),
+                    'DOCTORS_NAME' => $item->getDoctors()->getElement()->getName(),
                 ]
             ];
         }
