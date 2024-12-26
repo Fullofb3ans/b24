@@ -1,6 +1,15 @@
 <?
 if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true) die();
 
+require $_SERVER['DOCUMENT_ROOT'] . '/bitrix/header.php';
+require_once($_SERVER['DOCUMENT_ROOT'].'/local/app/Models/HospitalClientsTable.php');
+require_once($_SERVER['DOCUMENT_ROOT'].'/local/app/Models/Lists/DocsPropertyValuesTable.php');
+require_once($_SERVER['DOCUMENT_ROOT'].'/local/app/Models/Lists/DocsProcedurePropertyValuesTable.php');
+
+use Models\Lists\DocsPropertyValuesTable as DocsTable;
+use Models\Lists\DocsProcedurePropertyValuesTable as ProcTable;
+use Models\HospitalClientsTable as HospitalClientsTable;
+
 use Bitrix\Main\Context,	
     Bitrix\Main\Application,
     Bitrix\Main\Type\DateTime,
