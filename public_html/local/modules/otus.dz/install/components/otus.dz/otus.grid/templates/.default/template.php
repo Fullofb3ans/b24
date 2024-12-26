@@ -21,22 +21,10 @@ $nav->setRecordCount($arResult['COUNT']);
 <?
 // echo '<h1>test</h1>';
 
-$APPLICATION->includeComponent(
-	"bitrix:main.ui.grid",
-	"",
-	[
-		"GRID_ID" => "MY_GRID_ID",
-		"COLUMNS" => $arResult['COLUMNS'],
-		"ROWS" => $arResult['LISTS'],
-		"NAV_OBJECT" => $nav,
-		"AJAX_MODE" => "Y",
-		"AJAX_OPTION_JUMP" => "N",
-		"AJAX_OPTION_HISTORY" => "N",
-		"SHOW_ROW_CHECKBOXES" =>$arResult['SHOW_ROW_CHECKBOXES'],
-		"SHOW_SELECTED_COUNTER" => false,
-		"SHOW_PAGESIZE" => false,
-		
-	]
+$APPLICATION->IncludeComponent(
+    'bitrix:main.ui.grid',
+    '',
+    $arResult['GRID_DATA']
 );
 ?>
 

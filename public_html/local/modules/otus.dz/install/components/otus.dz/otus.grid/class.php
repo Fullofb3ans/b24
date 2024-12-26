@@ -1,130 +1,94 @@
 <?
 if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true) die();
-/** @var CBitrixComponent $this */
-/** @var array $arParams */
-/** @var array $arResult */
-/** @var string $componentPath */
-/** @var string $componentName */
-/** @var string $componentTemplate */
-/** @global CDatabase $DB */
-/** @global CUser $USER */
-/** @global CMain $APPLICATION */
 
-/** @global CIntranetToolbar $INTRANET_TOOLBAR */
-
-// global $INTRANET_TOOLBAR;
-// use Bitrix\Main\Engine\Contract\Controllerable;
 use Bitrix\Main\Context,	
-	Bitrix\Main\Application,
-	Bitrix\Main\Type\DateTime,
-	Bitrix\Main\Loader,
-	Bitrix\Main\Localization\Loc,
-	Bitrix\Main\Engine\Contract\Controllerable,
-	Bitrix\Iblock;
-use Bitrix\Main\Engine\Contract;
-use Bitrix\Currency\CurrencyTable as Currency;
+    Bitrix\Main\Application,
+    Bitrix\Main\Type\DateTime,
+    Bitrix\Main\Loader,
+    Bitrix\Main\Localization\Loc,
+    Bitrix\Main\Engine\Contract\Controllerable,
+    Bitrix\Iblock;
 
-
-
-class TableViewsComponent extends \CBitrixComponent
+class TableViewsComponent extends \CBitrixComponent implements Controllerable
 {
-
     protected $request;
 
-    /**
-     * Подготовка параметров компонента
-     * @param $arParams
-     * @return mixed
-    */
-    public function onPrepareComponentParams($arParams) {
-       // тут пишем логику обработки параметров, дополнение к параметрам по умолчанию
-       return $arParams;
+    public function configureActions()
+    {
+        return [];
     }
 
+    public function onPrepareComponentParams($arParams) {
+        return $arParams;
+    }
 
-    /**
-     * Проверка наличия модулей требуемых для работы компонента
-     * @return bool
-     * @throws Exception
-    */
     private function checkModules()
     {
-        if(!Loader::includeModule('iblock') || !Loader::includeModule('currency')){
+        if(!Loader::includeModule('iblock')){
             throw new \Exception("Не загружены модули необходимые для работы компонента");
         }
         return true;
     }
 
-
     private function getColumn()
     {
-        $fieldMap = Currency::getMap();
-        $columns = [];
-        foreach ($fieldMap as $key => $field) {
-            $columns[] = array(
-                'id' => $field->getName(),
-                'name' => $field->getTitle()
-            );
-        }
-        return $columns;
+        return [
+            ['id' => 'ID', 'name' => 'ID', 'sort' => 'ID', 'default' => true],
+            ['id' => 'PROCEDURA_NAME', 'name' => 'Процедура', 'sort' => 'PROCEDURA_NAME', 'default' => true],
+            ['id' => 'DOCTORS_NAME', 'name' => 'Врач', 'sort' => 'DOCTORS_NAME', 'default' => true],
+        ];
     }
-
 
     private function getList($page = 1, $limit = 1)
     {
         $offset = $limit * ($page-1);
         $list = [];
-        $data = Currency::getList([
-            'select' => ['*'],
-            'filter' => [], 
-            'limit' => $limit,
-            'offset' =>$offset
-        ]);
         
-        while ($item = $data->fetch()) {
-            $list[] = array('data' => $item);
+        $result = HospitalClientsTable::getList([
+            'select' => [
+                '*',
+                'PROCEDURA_NAME' => 'PROCEDURA.ELEMENT.NAME',
+                'DOCTORS_NAME'=> 'DOCTORS.ELEMENT.NAME'
+            ],
+            'limit' => $limit,
+            'offset' => $offset
+        ])->fetchCollection();
+
+        foreach($result as $item) {
+            $list[] = [
+                'data' => [
+                    'ID' => $item->getId(),
+                    'PROCEDURA_NAME' => $item->get('PROCEDURA_NAME'),
+                    'DOCTORS_NAME' => $item->get('DOCTORS_NAME'),
+                ]
+            ];
         }
     
         return $list;
     }
 
-
-    /**
-     * Точка входа в компонент
-     * Должна содержать только последовательность вызовов вспомогательых ф-ий и минимум логики
-     * всю логику стараемся разносить по классам и методам 
-     */
     public function executeComponent() {
-
         try
         {
-            $this->checkModules(); // проверяем подключение модулей
+            $this->checkModules();
+            $this->request = Application::getInstance()->getContext()->getRequest();
 
-            // получаем параметры методов GET и POST, из обьекта request который позволяет получить данные о текущем запросе: метод и протокол, запрошенный URL, переданные параметры
-            $this->$request = Application::getInstance()->getContext()->getRequest();
-
-            if(isset($this->$request['report_list'])){
-                $page = explode('page-', $this->$request['report_list']);
+            if(isset($this->request['report_list'])){
+                $page = explode('page-', $this->request['report_list']);
                 $page = $page[1];
             }else{
                 $page = 1;
             }
 
-            $this->arResult['COLUMNS'] = $this->getColumn(); // получаем названия полей таблицы
-            $this->arResult['LISTS'] = $this->getList($page, $this->arParams['NUM_PAGE']); // получаем записи таблицы
-            $this->arResult['COUNT'] =  Currency::getCount(); // количество записей
-         
+            $this->arResult['COLUMNS'] = $this->getColumn();
+            $this->arResult['LISTS'] = $this->getList($page, $this->arParams['NUM_PAGE']);
+            $this->arResult['COUNT'] = HospitalClientsTable::getCount();
 
-            // подключаем шаблон
             $this->IncludeComponentTemplate();
-
         }
         catch (SystemException $e)
         {
             ShowError($e->getMessage());
         }
-
     }
-
-
 }
