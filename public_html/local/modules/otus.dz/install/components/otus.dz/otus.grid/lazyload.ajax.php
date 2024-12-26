@@ -32,7 +32,7 @@ echo '<h1>TEST</h1>';
 
 $APPLICATION->IncludeComponent(
     'otus.dz:otus.grid',
-    '.default',
+    '',
     [
         'dealId' => $dealId,
 
