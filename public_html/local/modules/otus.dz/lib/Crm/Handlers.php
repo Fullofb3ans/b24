@@ -22,7 +22,7 @@ class Handlers
             'loader' => [
                 'serviceUrl' => '/bitrix/components/otus.dz/otus.grid/lazyload.ajax.php?&site=' . \SITE_ID . '&' . \bitrix_sessid_get(),
                 'componentData' => [
-                    'template' => '',
+                    'template' => '.default',
                     'params' => [
                         'DEAL_ID' => $dealId,
                     ],
