@@ -20,21 +20,23 @@ $nav->setRecordCount($arResult['COUNT']);
 
 <?
 // здесь мы модключаем штатный компонет грид и передаем ему данные
-$APPLICATION->includeComponent(
-	"bitrix:main.ui.grid",
-	"",
-	[
-		"GRID_ID" => "MY_GRID_ID",
-		"COLUMNS" => $arResult['COLUMNS'],
-		"ROWS" => $arResult['LISTS'],
-		"NAV_OBJECT" => $nav,
-		"AJAX_MODE" => "Y",
-		"AJAX_OPTION_JUMP" => "N",
-		"AJAX_OPTION_HISTORY" => "N",
-		"SHOW_ROW_CHECKBOXES" =>$arResult['SHOW_ROW_CHECKBOXES'],
-		"SHOW_SELECTED_COUNTER" => false,
-		"SHOW_PAGESIZE" => false,
+// $APPLICATION->includeComponent(
+// 	"bitrix:main.ui.grid",
+// 	"",
+// 	[
+// 		"GRID_ID" => "MY_GRID_ID",
+// 		"COLUMNS" => $arResult['COLUMNS'],
+// 		"ROWS" => $arResult['LISTS'],
+// 		"NAV_OBJECT" => $nav,
+// 		"AJAX_MODE" => "Y",
+// 		"AJAX_OPTION_JUMP" => "N",
+// 		"AJAX_OPTION_HISTORY" => "N",
+// 		"SHOW_ROW_CHECKBOXES" =>$arResult['SHOW_ROW_CHECKBOXES'],
+// 		"SHOW_SELECTED_COUNTER" => false,
+// 		"SHOW_PAGESIZE" => false,
 		
-	]
-);
+// 	]
+// );
+echo '<h1>Work</h1>'
 ?>
+
