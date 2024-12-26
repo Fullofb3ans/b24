@@ -81,17 +81,33 @@ class TableViewsComponent extends \CBitrixComponent implements Controllerable
             $this->checkModules();
             $this->request = Application::getInstance()->getContext()->getRequest();
     
-            // Set required grid parameters
+            $result = HospitalClientsTable::getList([
+                'select' => [
+                    '*',
+                    'PROCEDURA_NAME' => 'PROCEDURA.ELEMENT.NAME',
+                    'DOCTORS_NAME'=> 'DOCTORS.ELEMENT.NAME'
+                ],
+            ])->fetchCollection();
+    
+            $rows = [];
+            foreach($result as $item) {
+                $rows[] = [
+                    'data' => [
+                        'ID' => $item->getId(),
+                        'PROCEDURA_NAME' => $item->get('PROCEDURA_NAME'),
+                        'DOCTORS_NAME' => $item->get('DOCTORS_NAME'),
+                    ]
+                ];
+            }
+    
             $this->arResult['GRID_DATA'] = [
-                'GRID_ID' => 'bitrix_example_grid',
+                'GRID_ID' => 'hospital_clients_grid',
                 'COLUMNS' => [
                     ['id' => 'ID', 'name' => 'ID', 'sort' => 'ID', 'default' => true],
-                    ['id' => 'NAME', 'name' => 'Name', 'sort' => 'NAME', 'default' => true],
-                    ['id' => 'AGE', 'name' => 'Age', 'sort' => 'AGE', 'default' => true],
+                    ['id' => 'PROCEDURA_NAME', 'name' => 'Процедура', 'sort' => 'PROCEDURA_NAME', 'default' => true],
+                    ['id' => 'DOCTORS_NAME', 'name' => 'Врач', 'sort' => 'DOCTORS_NAME', 'default' => true],
                 ],
-                'ROWS' => [
-                    ['data' => ['ID' => 1, 'NAME' => 'Test Name', 'AGE' => 25]]
-                ]
+                'ROWS' => $rows
             ];
     
             echo '<pre>';
@@ -104,5 +120,6 @@ class TableViewsComponent extends \CBitrixComponent implements Controllerable
             ShowError($e->getMessage());
         }
     }
+    
 
 }
