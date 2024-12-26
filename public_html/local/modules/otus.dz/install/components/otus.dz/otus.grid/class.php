@@ -68,26 +68,40 @@ class TableViewsComponent extends \CBitrixComponent implements Controllerable
     }
 
     public function executeComponent() {
-        try
-        {
+        try {
             $this->checkModules();
             $this->request = Application::getInstance()->getContext()->getRequest();
-
+    
             if(isset($this->request['report_list'])){
                 $page = explode('page-', $this->request['report_list']);
                 $page = $page[1];
             }else{
                 $page = 1;
             }
-
-            $this->arResult['COLUMNS'] = $this->getColumn();
-            $this->arResult['LISTS'] = $this->getList($page, $this->arParams['NUM_PAGE']);
-            $this->arResult['COUNT'] = HospitalClientsTable::getCount();
-
+    
+            // Prepare grid data
+            $this->arResult['GRID_DATA'] = [
+                'GRID_ID' => 'hospital_clients_grid',
+                'COLUMNS' => $this->getColumn(),
+                'ROWS' => $this->getList($page, $this->arParams['NUM_PAGE']),
+                'NAV_OBJECT' => new \Bitrix\Main\UI\PageNavigation('report_list'),
+                'AJAX_MODE' => 'Y',
+                'AJAX_ID' => \CAjax::getComponentID('bitrix:main.ui.grid', '.default', ''),
+                'AJAX_OPTION_JUMP' => 'N',
+                'SHOW_ROW_CHECKBOXES' => true,
+                'SHOW_CHECK_ALL_CHECKBOXES' => true,
+                'SHOW_ROW_ACTIONS_MENU' => true,
+                'SHOW_GRID_SETTINGS_MENU' => true,
+                'SHOW_NAVIGATION_PANEL' => true,
+                'SHOW_PAGINATION' => true,
+                'SHOW_SELECTED_COUNTER' => true,
+                'SHOW_TOTAL_COUNTER' => true,
+                'TOTAL_ROWS_COUNT' => $this->arResult['COUNT'],
+            ];
+    
             $this->IncludeComponentTemplate();
         }
-        catch (SystemException $e)
-        {
+        catch (SystemException $e) {
             ShowError($e->getMessage());
         }
     }
