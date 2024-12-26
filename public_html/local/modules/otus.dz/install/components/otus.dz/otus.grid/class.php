@@ -67,55 +67,28 @@ class TableViewsComponent extends \CBitrixComponent implements Controllerable
         return $list;
     }
 
+
     public function executeComponent() {
-        try {
+        try
+        {
             $this->checkModules();
             $this->request = Application::getInstance()->getContext()->getRequest();
-    
-            // Static data for testing
-            $this->arResult['GRID_DATA'] = [
-                'GRID_ID' => 'test_grid',
-                'COLUMNS' => [
-                    ['id' => 'ID', 'name' => 'ID', 'sort' => 'ID', 'default' => true],
-                    ['id' => 'NAME', 'name' => 'Name', 'sort' => 'NAME', 'default' => true],
-                    ['id' => 'AGE', 'name' => 'Age', 'sort' => 'AGE', 'default' => true],
-                ],
-                'ROWS' => [
-                    [
-                        'data' => [
-                            'ID' => 1,
-                            'NAME' => 'John Doe',
-                            'AGE' => 25,
-                        ]
-                    ],
-                    [
-                        'data' => [
-                            'ID' => 2,
-                            'NAME' => 'Jane Smith',
-                            'AGE' => 30,
-                        ]
-                    ],
-                    [
-                        'data' => [
-                            'ID' => 3,
-                            'NAME' => 'Bob Johnson',
-                            'AGE' => 35,
-                        ]
-                    ],
-                ],
-                'SHOW_ROW_CHECKBOXES' => true,
-                'SHOW_CHECK_ALL_CHECKBOXES' => true,
-                'SHOW_ROW_ACTIONS_MENU' => true,
-                'SHOW_GRID_SETTINGS_MENU' => true,
-                'SHOW_PAGINATION' => true,
-                'SHOW_SELECTED_COUNTER' => true,
-                'SHOW_TOTAL_COUNTER' => true,
-                'TOTAL_ROWS_COUNT' => 3,
-            ];
-    
+
+            if(isset($this->request['report_list'])){
+                $page = explode('page-', $this->request['report_list']);
+                $page = $page[1];
+            }else{
+                $page = 1;
+            }
+
+            $this->arResult['COLUMNS'] = $this->getColumn();
+            $this->arResult['LISTS'] = $this->getList($page, $this->arParams['NUM_PAGE']);
+            $this->arResult['COUNT'] = HospitalClientsTable::getCount();
+
             $this->IncludeComponentTemplate();
         }
-        catch (SystemException $e) {
+        catch (SystemException $e)
+        {
             ShowError($e->getMessage());
         }
     }
