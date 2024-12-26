@@ -110,9 +110,6 @@ class TableViewsComponent extends \CBitrixComponent implements Controllerable
                 'ROWS' => $rows
             ];
     
-            echo '<pre>';
-            print_r($this->arResult['GRID_DATA']);
-            echo '</pre>';
     
             $this->IncludeComponentTemplate();
         }
