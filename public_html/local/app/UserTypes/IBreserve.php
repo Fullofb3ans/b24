@@ -5,7 +5,7 @@ use Models\Lists\DocsPropertyValuesTable as DocsTable;
 
 class IBreserve
 {
- private function printProcedures(){
+ private static function printProcedures(){
         $docs = DocsTable::getList([      
             'select' => [
                 'ID' => 'IBLOCK_ELEMENT_ID',
@@ -61,19 +61,6 @@ class IBreserve
         }
     }
 
-   
-    public static function GetPublicViewHTML($arProperty, $arValue, $strHTMLControlName)
-    {
-    printProcedures();
-    }
-
-
-    public static function GetAdminListViewHTML($arProperty, $arValue, $strHTMLControlName)
-    {    
-        printProcedures();
-    }
-
-
     public static function GetSearchContent($arProperty, $value, $strHTMLControlName)
     {
         if (trim($value['VALUE']) != '') {
@@ -85,7 +72,18 @@ class IBreserve
 
     public static function GetPropertyFieldHtml($arProperty, $arValue, $strHTMLControlName)
     {
-        printProcedures();
+        return self::printProcedures();
     }
+    
+    public static function GetAdminListViewHTML($arProperty, $arValue, $strHTMLControlName)
+    {
+        return self::printProcedures();
+    }
+    
+    public static function GetPublicViewHTML($arProperty, $arValue, $strHTMLControlName)
+    {
+        return self::printProcedures();
+    }
+    
 }
 
