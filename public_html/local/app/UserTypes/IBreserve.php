@@ -68,6 +68,7 @@ class IBreserve
 
     public static function GetUserTypeDescription()
     {
+        \Bitrix\Main\UI\Extension::load(['popup']);
         return array(
             'PROPERTY_TYPE'        => 'S', // тип поля
             'USER_TYPE'            => 'iblock_reserve', // код типа пользовательского свойства
