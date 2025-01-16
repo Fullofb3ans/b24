@@ -65,7 +65,7 @@ class IBreserve
 
  if(name && time) {
         BX.ajax.post(
-            "/local/tools/lists/add_element.php",
+            "/local/tools/lists/add_element_to_reserve.php",
             {
                 iblockId: 47,
                 fields: {
