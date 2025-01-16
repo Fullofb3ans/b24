@@ -32,19 +32,19 @@ class IBreserve
             foreach($docs['PROCEDURA_ID'] as $procId) {
                     
                 $strResult .= '<span class="procedure-link" id="proc_'.$procId.'" onclick="BX.PopupWindowManager.create(\'popup-'.$procId.'\', this, {
+                                    width: 400,
+                    height: 200,
+                    zIndex: 100,
+                    closeIcon: true,
+                    titleBar: \'Запись на процедуру\',
+                    closeByEsc: true,
                     content: `<div class="popup-content">
                         <div>Процедура: ' . htmlspecialchars($proceduraList[$procId]) . '</div>
                         <div style="margin-top: 20px;">
                             <input type="text" id="name_'.$procId.'" placeholder="ФИО" style="width: 100%; margin-bottom: 10px;">
                             <input type="datetime-local" id="time_'.$procId.'" style="width: 100%; margin-bottom: 10px;">
                             <button onclick="addReservation('.$procId.')" class="ui-btn ui-btn-primary">Добавить</button>
-                        </div>,
-                    width: 400,
-                    height: 200,
-                    zIndex: 100,
-                    closeIcon: true,
-                    titleBar: \'Запись на процедуру\',
-                    closeByEsc: true
+                        </div></div>,
                 }).show();">' 
                           . $proceduraList[$procId] . '</span><br>';
             }
