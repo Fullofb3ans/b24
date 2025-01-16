@@ -33,19 +33,31 @@ class IBreserve
    
     public static function GetPublicViewHTML($arProperty, $arValue, $strHTMLControlName)
     {
-        $arSettings = self::PrepareSettings($arProperty);
-
-        $arVals = array();
-        if (!is_array($arProperty['VALUE'])) {
-            $arProperty['VALUE'] = array($arProperty['VALUE']);
-            $arProperty['DESCRIPTION'] = array($arProperty['DESCRIPTION']);
+        $docs = DocsTable::getList([      
+            'select' => [
+                'ID' => 'IBLOCK_ELEMENT_ID',
+                'NAME' => 'ELEMENT.NAME',
+                'PROCEDURA_ID',
+            ]
+        ])->fetch();
+    
+        $proceduresAll = \Bitrix\Iblock\Elements\ElementProcTable::query()
+            ->addSelect('NAME')
+            ->addSelect('ID')
+            ->fetchCollection();
+    
+        $proceduraList = [];
+        foreach($proceduresAll as $procedura){
+            $proceduraList[$procedura->getId()] = $procedura->getName();
         }
-        foreach ($arProperty['VALUE'] as $i => $value) {
-            $arVals[$value] = $arProperty['DESCRIPTION'][$i];
-        }
-
+    
         $strResult = '';
-        $strResult = '<a ' . ($arSettings["_BLANK"] == 'Y' ? 'target="_blank"' : '') . ' href="' . trim($arValue['VALUE']) . '">' . (trim($arVals[$arValue['VALUE']]) ? trim($arVals[$arValue['VALUE']]) : trim($arValue['VALUE'])) . '</a>';
+        if ($docs && isset($docs['PROCEDURA_ID'])) {
+            foreach($docs['PROCEDURA_ID'] as $procId) {
+                $strResult .= $proceduraList[$procId] . '<br>';
+            }
+        }
+    
         return $strResult;
     }
 
