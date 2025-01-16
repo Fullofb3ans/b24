@@ -71,7 +71,7 @@ class IBreserve
                 fields: {
                     NAME: name,
                     FIO_RESERVE: name,
-                    DATE_RESERVE: time,
+                    DATE_RESERVE: time.replace("T", " "),
                     PROTSEDURA_RESERVE: procName
                 }
             },
