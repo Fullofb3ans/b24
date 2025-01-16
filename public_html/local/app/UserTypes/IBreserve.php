@@ -44,7 +44,7 @@ class IBreserve
                             <input type="text" id="name_'.$procId.'" placeholder="ФИО" style="width: 100%; margin-bottom: 10px;">
                             <input type="datetime-local" id="time_'.$procId.'" style="width: 100%; margin-bottom: 10px;">
                             <button onclick="addReservation('.$procId.')" class="ui-btn ui-btn-primary">Добавить</button>
-                        </div></div>,
+                        </div></div>
                 }).show();">' 
                           . $proceduraList[$procId] . '</span><br>';
             }
