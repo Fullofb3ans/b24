@@ -2,7 +2,7 @@
 
 namespace UserTypes;
 
-class IBLink
+class IBreserve
 {
     public static function GetUserTypeDescription()
     {
