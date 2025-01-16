@@ -1,6 +1,7 @@
 <?php
 
 namespace UserTypes;
+use Models\Lists\DocsPropertyValuesTable as DocsTable;
 
 class IBreserve
 {
@@ -70,235 +71,37 @@ class IBreserve
 
     public static function GetPropertyFieldHtml($arProperty, $arValue, $strHTMLControlName)
     {
-        global $bVarsFromForm, $bCopy, $PROP, $APPLICATION;
-        $strResult = '';
-
-        $inpid = md5('link_' . rand(0, 999));
-
-        if ($_REQUEST['mode'] == 'frame') {
-            $strResult .= '<div><input type="text" name="' . $strHTMLControlName["VALUE"] . '" size="10" value="' . htmlspecialchars($arValue["VALUE"]) . '" />';
-            if ($arProperty['WITH_DESCRIPTION'] == 'Y') {
-                $strResult .= '&nbsp;<input type="text" name="' . $strHTMLControlName["DESCRIPTION"] . '" size="8" value="' . htmlspecialchars($arValue["DESCRIPTION"]) . '" /></div>';
-            }
-        } else {
-            $strResult .= '<select id="pro' . $inpid . '">';
-            $strResult .= '<option value="http://">http://</option>';
-            $strResult .= '<option value="https://">https://</option>';
-            $strResult .= '<option value="/">/ (local from root)</option>';
-            $strResult .= '<option value="./">./ (local from current)</option>';
-            $strResult .= '<option value="../">../ (local from parent)</option>';
-            $strResult .= '</select>&nbsp;';
-            $strResult .= '<input id="link' . $inpid . '" value="' . htmlspecialcharsex($arValue['VALUE']) . '" size="15" type="text">';
-            $strResult .= '<input id="full' . $inpid . '" type="hidden" name="' . $strHTMLControlName["VALUE"] . '" value="' . htmlspecialcharsex($arValue['VALUE']) . '">';
-            if ($arProperty['WITH_DESCRIPTION'] == 'Y') {
-                $strResult .= ' <span>Текст ссылки: <input name="' . $strHTMLControlName["DESCRIPTION"] . '" value="' . htmlspecialcharsex($arValue['DESCRIPTION']) . '" size="15" type="text"></span>';
-            }
-            $strResult .= "<br>";
-
-            $strResult .= '
-        <script type="text/javascript">
-            BX.bind(
-                BX("link' . $inpid . '"),
-                "bxchange",
-                function()
-                {
-                    var linkval = BX("link' . $inpid . '").value;
-                    linkval = linkval.trim();
-                    var linkval_ = linkval.toLowerCase();
-                    if (linkval_.substr(0, 8) == "https://")
-                    {
-                        BX("pro' . $inpid . '").value = "https://";
-                        linkval = linkval.substr(8);
-                        while (linkval.substr(0, 1) == "/")
-                        {
-                            linkval = linkval.substr(1);
-                        }
-                        BX("link' . $inpid . '").value = linkval;
-                        BX("full' . $inpid . '").value = "https://" + linkval;
-                    }
-                    else if (linkval_.substr(0, 7) == "http://")
-                    {
-                        BX("pro' . $inpid . '").value = "http://";
-                        linkval = linkval.substr(7);
-                        while (linkval.substr(0, 1) == "/")
-                        {
-                            linkval = linkval.substr(1);
-                        }
-                        BX("link' . $inpid . '").value = linkval;
-                        BX("full' . $inpid . '").value = "http://" + linkval;
-                    }
-                    else if (linkval_.substr(0, 2) == "//")
-                    {
-                        BX("pro' . $inpid . '").value = "http://";
-                        while (linkval.substr(0, 1) == "/")
-                        {
-                            linkval = linkval.substr(1);
-                        }
-                        BX("link' . $inpid . '").value = linkval;
-                        BX("full' . $inpid . '").value = "http://" + linkval;
-                    }
-                    else if (linkval_.substr(0, 1) == "/")
-                    {
-                        BX("pro' . $inpid . '").value = "/";
-                        while (linkval.substr(0, 1) == "/")
-                        {
-                            linkval = linkval.substr(1);
-                        }
-                        BX("link' . $inpid . '").value = linkval;
-                        BX("full' . $inpid . '").value = "/" + linkval;
-                    }
-                    else if (linkval_.substr(0, 2) == "./")
-                    {
-                        BX("pro' . $inpid . '").value = "./";
-                        while (linkval.substr(0, 2) == "./")
-                        {
-                            linkval = linkval.substr(2);
-                        }
-                        BX("link' . $inpid . '").value = linkval;
-                        BX("full' . $inpid . '").value = "./" + linkval;
-                    }
-                    else if (linkval_.substr(0, 3) == "../")
-                    {
-                        BX("pro' . $inpid . '").value = "../";
-                        while (linkval.substr(0, 3) == "../")
-                        {
-                            linkval = linkval.substr(3);
-                        }
-                        BX("link' . $inpid . '").value = linkval;
-                        BX("full' . $inpid . '").value = "../" + linkval;
-                    }
-                    else if (linkval.length > 0)
-                    {
-                        BX("full' . $inpid . '").value = BX("pro' . $inpid . '").value + linkval;
-                    }
-                    else
-                    {
-                        BX("full' . $inpid . '").value = "";
-                    }
-                }
-            );
-            
-            BX.bind(
-                BX("pro' . $inpid . '"),
-                "bxchange",
-                function()
-                {
-                    var protocol_ = BX("pro' . $inpid . '").value;
-                    var linkval = BX("link' . $inpid . '").value;
-                    linkval = linkval.trim();
-                    while (linkval.substr(0, 1) == "/")
-                    {
-                        linkval = linkval.substr(1);
-                    }
-                    var linkval_ = linkval.toLowerCase();
-                    if (linkval_.substr(0, 8) == "https://")
-                    {
-                        BX("link' . $inpid . '").value = linkval.substr(8);
-                        BX("full' . $inpid . '").value = protocol_ + linkval.substr(8);
-                    }
-                    else if (linkval_.substr(0, 7) == "http://")
-                    {
-                        BX("link' . $inpid . '").value = linkval.substr(7);
-                        BX("full' . $inpid . '").value = protocol_ + linkval.substr(7);
-                    }
-                    else if (linkval_.substr(0, 2) == "./")
-                    {
-                        BX("link' . $inpid . '").value = linkval.substr(2);
-                        BX("full' . $inpid . '").value = protocol_ + linkval.substr(2);
-                    }
-                    else if (linkval_.substr(0, 3) == "../")
-                    {
-                        BX("link' . $inpid . '").value = linkval.substr(3);
-                        BX("full' . $inpid . '").value = protocol_ + linkval.substr(3);
-                    }
-                    else if (linkval.length > 0)
-                    {
-                        BX("full' . $inpid . '").value = protocol_ + linkval;
-                    }
-                    else
-                    {
-                        BX("full' . $inpid . '").value = "";
-                    }
-                }
-            );
-            
-            var linkval = BX("link' . $inpid . '").value;
-            linkval = linkval.trim();
-            var linkval_ = linkval.toLowerCase();
-            if (linkval_.substr(0, 8) == "https://")
-            {
-                BX("pro' . $inpid . '").value = "https://";
-                linkval = linkval.substr(8);
-                while (linkval.substr(0, 1) == "/")
-                {
-                    linkval = linkval.substr(1);
-                }
-                BX("link' . $inpid . '").value = linkval;
-                BX("full' . $inpid . '").value = "https://" + linkval;
-            }
-            else if (linkval_.substr(0, 7) == "http://")
-            {
-                BX("pro' . $inpid . '").value = "http://";
-                linkval = linkval.substr(7);
-                while (linkval.substr(0, 1) == "/")
-                {
-                    linkval = linkval.substr(1);
-                }
-                BX("link' . $inpid . '").value = linkval;
-                BX("full' . $inpid . '").value = "http://" + linkval;
-            }
-            else if (linkval_.substr(0, 2) == "//")
-            {
-                BX("pro' . $inpid . '").value = "http://";
-                while (linkval.substr(0, 1) == "/")
-                {
-                    linkval = linkval.substr(1);
-                }
-                BX("link' . $inpid . '").value = linkval;
-                BX("full' . $inpid . '").value = "http://" + linkval;
-            }
-            else if (linkval_.substr(0, 1) == "/")
-            {
-                BX("pro' . $inpid . '").value = "/";
-                while (linkval.substr(0, 1) == "/")
-                {
-                    linkval = linkval.substr(1);
-                }
-                BX("link' . $inpid . '").value = linkval;
-                BX("full' . $inpid . '").value = "/" + linkval;
-            }
-            else if (linkval_.substr(0, 2) == "./")
-            {
-                BX("pro' . $inpid . '").value = "./";
-                while (linkval.substr(0, 2) == "./")
-                {
-                    linkval = linkval.substr(2);
-                }
-                BX("link' . $inpid . '").value = linkval;
-                BX("full' . $inpid . '").value = "./" + linkval;
-            }
-            else if (linkval_.substr(0, 3) == "../")
-            {
-                BX("pro' . $inpid . '").value = "../";
-                while (linkval.substr(0, 3) == "../")
-                {
-                    linkval = linkval.substr(3);
-                }
-                BX("link' . $inpid . '").value = linkval;
-                BX("full' . $inpid . '").value = "../" + linkval;
-            }
-            else if (linkval.length > 0)
-            {
-                BX("full' . $inpid . '").value = BX("pro' . $inpid . '").value + linkval;
-            }
-            else
-            {
-                BX("full' . $inpid . '").value = "";
-            }
-        </script>
-            ';
+    
+        $docs = DocsTable::getList([      
+            'select' => [
+                'ID' => 'IBLOCK_ELEMENT_ID',
+                'NAME' => 'ELEMENT.NAME',
+                'PROCEDURA_ID',
+            ],
+            'filter' => [
+                'IBLOCK_ELEMENT_ID' => $arProperty['ELEMENT_ID']
+            ]
+        ])->fetch();
+    
+        $proceduresAll = \Bitrix\Iblock\Elements\ElementProcTable::query()
+            ->addSelect('NAME')
+            ->addSelect('ID')
+            ->fetchCollection();
+    
+        $proceduraList = [];
+        foreach($proceduresAll as $procedura){
+            $proceduraList[$procedura->getId()] = $procedura->getName();
         }
-
+    
+        $strResult = '<select name="'.$strHTMLControlName["VALUE"].'">';
+        $strResult .= '<option value="">Выберите процедуру</option>';
+        
+        $strResult = '<div class="procedures-text">';
+        foreach($docs['PROCEDURA_ID'] as $procId) {
+            $strResult .= $proceduraList[$procId] . '<br>';
+        }
+        $strResult .= '</div>';
+    
         return $strResult;
     }
 }
