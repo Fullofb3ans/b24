@@ -70,39 +70,41 @@ class IBreserve
     }
 
     public static function GetPropertyFieldHtml($arProperty, $arValue, $strHTMLControlName)
-    {
-    
-        $docs = DocsTable::getList([      
-            'select' => [
-                'ID' => 'IBLOCK_ELEMENT_ID',
-                'NAME' => 'ELEMENT.NAME',
-                'PROCEDURA_ID',
-            ],
-            'filter' => [
-                'IBLOCK_ELEMENT_ID' => $arProperty['ELEMENT_ID']
-            ]
-        ])->fetch();
-    
-        $proceduresAll = \Bitrix\Iblock\Elements\ElementProcTable::query()
-            ->addSelect('NAME')
-            ->addSelect('ID')
-            ->fetchCollection();
-    
-        $proceduraList = [];
-        foreach($proceduresAll as $procedura){
-            $proceduraList[$procedura->getId()] = $procedura->getName();
-        }
-    
-        $strResult = '<select name="'.$strHTMLControlName["VALUE"].'">';
-        $strResult .= '<option value="">Выберите процедуру</option>';
-        
-        $strResult = '<div class="procedures-text">';
+{
+
+    // Get doctor ID from current list element
+    $doctorId = $arProperty['IBLOCK_ELEMENT_ID'];
+
+    $docs = DocsTable::getList([      
+        'select' => [
+            'ID' => 'IBLOCK_ELEMENT_ID',
+            'NAME' => 'ELEMENT.NAME',
+            'PROCEDURA_ID',
+        ],
+        'filter' => [
+            'IBLOCK_ELEMENT_ID' => $doctorId
+        ]
+    ])->fetch();
+
+    $proceduresAll = \Bitrix\Iblock\Elements\ElementProcTable::query()
+        ->addSelect('NAME')
+        ->addSelect('ID')
+        ->fetchCollection();
+
+    $proceduraList = [];
+    foreach($proceduresAll as $procedura){
+        $proceduraList[$procedura->getId()] = $procedura->getName();
+    }
+
+    $strResult = '<div class="procedures-text">';
+    if ($docs && isset($docs['PROCEDURA_ID'])) {
         foreach($docs['PROCEDURA_ID'] as $procId) {
             $strResult .= $proceduraList[$procId] . '<br>';
         }
-        $strResult .= '</div>';
-    
-        return $strResult;
     }
+    $strResult .= '</div>';
+
+    return $strResult;
+}
 }
 
