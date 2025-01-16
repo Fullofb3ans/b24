@@ -63,17 +63,11 @@ class IBreserve
     var time = document.getElementById("time_" + procId).value;
     var procName = document.getElementById("proc_" + procId).textContent;
 
-    if(name && time) {
-        BX.ajax({
-            url: "/bitrix/tools/lists/ajax.php",
-            method: "POST",
-            dataType: "json",
-            data: {
-                sessid: BX.bitrix_sessid(),
-                action: "addElement",
-                iblockTypeId: "lists",
+ if(name && time) {
+        BX.ajax.post(
+            "/local/tools/lists/add_element.php",
+            {
                 iblockId: 47,
-                elementCode: Date.now(),
                 fields: {
                     NAME: name,
                     FIO_RESERVE: name,
@@ -81,10 +75,10 @@ class IBreserve
                     PROTSEDURA_RESERVE: procName
                 }
             },
-            onsuccess: function(response) {
+            function(response) {
                 alert("Запись успешно создана!");
             }
-        });
+        );
     } else {
         alert("Заполните все поля");
     }
