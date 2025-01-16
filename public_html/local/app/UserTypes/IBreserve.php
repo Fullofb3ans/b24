@@ -59,9 +59,16 @@ class IBreserve
         $strResult .= '
         <script>
     function addReservation(procId) {
-    var name = document.getElementById("name_" + procId).value;
-    var time = document.getElementById("time_" + procId).value;
-    var procName = document.getElementById("proc_" + procId).textContent;
+    let name = document.getElementById("name_" + procId).value;
+    let time = document.getElementById("time_" + procId).value;
+    let procName = document.getElementById("proc_" + procId).textContent;
+
+    let dateObj = new Date(time);
+    let formattedDate = dateObj.getDate().toString().padStart(2, "0") + '.' +
+                        (dateObj.getMonth() + 1).toString().padStart(2, "0") + '.' +
+                        dateObj.getFullYear() + ' ' +
+                        dateObj.getHours().toString().padStart(2, "0") + ":" +
+                        dateObj.getMinutes().toString().padStart(2, "0");
 
  if(name && time) {
         BX.ajax.post(
