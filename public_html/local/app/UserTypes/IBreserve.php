@@ -6,6 +6,7 @@ use Models\Lists\DocsPropertyValuesTable as DocsTable;
 class IBreserve
 {
  private static function printProcedures(){
+    $doctorId = $arProperty['IBLOCK_ELEMENT_ID'];
     $docs = DocsTable::getList([      
         'select' => [
             'ID' => 'IBLOCK_ELEMENT_ID',
@@ -13,7 +14,7 @@ class IBreserve
             'PROCEDURA_ID',
         ],
             'filter' => [
-                'IBLOCK_ELEMENT_ID' => $arProperty['ELEMENT_ID']
+                'IBLOCK_ELEMENT_ID' => $doctorId
             ]
     ])->fetch();
 
