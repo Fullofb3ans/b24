@@ -45,7 +45,7 @@ class IBreserve
                 $strResult .= '<span class="procedure-link" id="proc_'.$procId.'" onclick="BX.PopupWindowManager.create(\'popup-'.$procId.'\', this, {
                     content: `'.$escapedContent.'`, // Use the escaped content here
                     width: 400,
-                    height: 200,
+                    height: 400,
                     zIndex: 100,
                     closeIcon: true,
                     titleBar: \'Запись на процедуру\',
@@ -58,15 +58,37 @@ class IBreserve
     
         $strResult .= '
         <script>
-            function addReservation(procId) {
-                var name = document.getElementById("name_" + procId).value;
-                var time = document.getElementById("time_" + procId).value;
-                if(name && time) {
-                    alert("Данные записи:\nФИО: " + name + "\nВремя: " + time);
-                } else {
-                    alert("Заполните все поля");
+    function addReservation(procId) {
+    var name = document.getElementById("name_" + procId).value;
+    var time = document.getElementById("time_" + procId).value;
+    var procName = document.getElementById("proc_" + procId).textContent;
+
+    if(name && time) {
+        BX.ajax({
+            url: "/bitrix/tools/lists/ajax.php",
+            method: "POST",
+            dataType: "json",
+            data: {
+                sessid: BX.bitrix_sessid(),
+                action: "addElement",
+                iblockTypeId: "lists",
+                iblockId: 47,
+                elementCode: Date.now(),
+                fields: {
+                    NAME: name,
+                    FIO_RESERVE: name,
+                    DATE_RESERVE: time,
+                    PROTSEDURA_RESERVE: procName
                 }
+            },
+            onsuccess: function(response) {
+                alert("Запись успешно создана!");
             }
+        });
+    } else {
+        alert("Заполните все поля");
+    }
+}
         </script>
         <style>
             .procedure-link {
