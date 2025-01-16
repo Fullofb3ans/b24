@@ -30,17 +30,14 @@ class IBreserve
         $strResult = '<div class="procedures-text">';
         if ($docs && isset($docs['PROCEDURA_ID'])) {
             foreach($docs['PROCEDURA_ID'] as $procId) {
-                $popupContent = '
-                    <div>Процедура: ' . $proceduraList[$procId] . '</div>
+                $popupContent = '<div class="popup-content">
+                    <div>Процедура: ' . htmlspecialchars($proceduraList[$procId]) . '</div>
                     <div style="margin-top: 20px;">
-                        <div style="margin-bottom: 10px;">
-                            <input type="text" id="name_'.$procId.'" placeholder="ФИО" style="width: 100%; margin-bottom: 10px;">
-                            <input type="datetime-local" id="time_'.$procId.'" style="width: 100%;">
-                        </div>
-                        <button onclick="addReservation('.$procId.')" class="ui-btn ui-btn-primary">
-                            Добавить
-                        </button>
-                    </div>';
+                        <input type="text" id="name_'.$procId.'" placeholder="ФИО" style="width: 100%; margin-bottom: 10px;">
+                        <input type="datetime-local" id="time_'.$procId.'" style="width: 100%; margin-bottom: 10px;">
+                        <button onclick="addReservation('.$procId.')" class="ui-btn ui-btn-primary">Добавить</button>
+                    </div>
+                </div>';
                 
                 $strResult .= '<span class="procedure-link" id="proc_'.$procId.'" onclick="BX.PopupWindowManager.create(\'popup-'.$procId.'\', this, {
                     content: \''.$popupContent.'\',
@@ -62,8 +59,7 @@ class IBreserve
                 var name = document.getElementById("name_" + procId).value;
                 var time = document.getElementById("time_" + procId).value;
                 if(name && time) {
-                    alert("Данные записи:\\nФИО: " + name + "\\nВремя: " + time);
-                    // Add your reservation logic here
+                    alert("Данные записи:\nФИО: " + name + "\nВремя: " + time);
                 } else {
                     alert("Заполните все поля");
                 }
@@ -82,7 +78,7 @@ class IBreserve
     
         return $strResult;
     }
-    
+        
 
     public static function GetUserTypeDescription()
     {
