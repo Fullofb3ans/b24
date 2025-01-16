@@ -5,37 +5,38 @@ use Models\Lists\DocsPropertyValuesTable as DocsTable;
 
 class IBreserve
 {
- private static function printProcedures(){
-    $docs = DocsTable::getList([      
-        'select' => [
-            'ID' => 'IBLOCK_ELEMENT_ID',
-            'NAME' => 'ELEMENT.NAME',
-            'PROCEDURA_ID',
-        ],
-            'filter' => [
-                'IBLOCK_ELEMENT_ID' => $arProperty['ELEMENT_ID']
-            ]
-    ])->fetch();
-
-    $proceduresAll = \Bitrix\Iblock\Elements\ElementProcTable::query()
-        ->addSelect('NAME')
-        ->addSelect('ID')
-        ->fetchCollection();
-
-    $proceduraList = [];
-    foreach($proceduresAll as $procedura){
-        $proceduraList[$procedura->getId()] = $procedura->getName();
-    }
-
-    $strResult = '';
-    if ($docs && isset($docs['PROCEDURA_ID'])) {
-        foreach($docs['PROCEDURA_ID'] as $procId) {
-            $strResult .= $proceduraList[$procId] . '<br>';
+    private static function printProcedures($arProperty){
+        $docs = DocsTable::getList([      
+            'select' => [
+                'ID' => 'IBLOCK_ELEMENT_ID',
+                'NAME' => 'ELEMENT.NAME',
+                'PROCEDURA_ID',
+            ],
+                'filter' => [
+                    'IBLOCK_ELEMENT_ID' => $arProperty['ELEMENT_ID']
+                ]
+        ])->fetch();
+    
+        $proceduresAll = \Bitrix\Iblock\Elements\ElementProcTable::query()
+            ->addSelect('NAME')
+            ->addSelect('ID')
+            ->fetchCollection();
+    
+        $proceduraList = [];
+        foreach($proceduresAll as $procedura){
+            $proceduraList[$procedura->getId()] = $procedura->getName();
         }
+    
+        $strResult = '';
+        if ($docs && isset($docs['PROCEDURA_ID'])) {
+            foreach($docs['PROCEDURA_ID'] as $procId) {
+                $strResult .= $proceduraList[$procId] . '<br>';
+            }
+        }
+    
+        return $strResult;
     }
-
-    return $strResult;
-    }
+    
 
     public static function GetUserTypeDescription()
     {
@@ -73,17 +74,17 @@ class IBreserve
 
     public static function GetPropertyFieldHtml($arProperty, $arValue, $strHTMLControlName)
     {
-        return self::printProcedures();
+        return self::printProcedures($arProperty);
     }
     
     public static function GetAdminListViewHTML($arProperty, $arValue, $strHTMLControlName)
     {
-        return self::printProcedures();
+        return self::printProcedures($arProperty);
     }
     
     public static function GetPublicViewHTML($arProperty, $arValue, $strHTMLControlName)
     {
-        return self::printProcedures();
+        return self::printProcedures($arProperty);
     }
     
 }
