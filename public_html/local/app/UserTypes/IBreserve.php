@@ -34,6 +34,34 @@ class IBreserve
             }
         }
     
+        $strResult .= '</div>';
+
+        $strResult .= '
+        <script>
+            function showProcedurePopup(procId) {
+                var popup = new BX.PopupWindow("procedure-popup-" + procId, null, {
+                    content: "Информация о процедуре " + procId,
+                    width: 400,
+                    height: 200,
+                    zIndex: 100,
+                    closeIcon: {right: "10px", top: "10px"},
+                    titleBar: "Детали процедуры",
+                    closeByEsc: true
+                });
+                popup.show();
+            }
+        </script>
+        <style>
+            .procedure-link {
+                cursor: pointer;
+                color: #2067b0;
+                text-decoration: underline;
+            }
+            .procedure-link:hover {
+                text-decoration: none;
+            }
+        </style>';
+
         return $strResult;
     }
     
