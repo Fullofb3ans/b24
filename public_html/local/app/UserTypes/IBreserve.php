@@ -51,11 +51,32 @@ class IBreserve
 
 
     public static function GetAdminListViewHTML($arProperty, $arValue, $strHTMLControlName)
-    {
-        $arSettings = self::PrepareSettings($arProperty);
-
+    {    
+        $docs = DocsTable::getList([      
+            'select' => [
+                'ID' => 'IBLOCK_ELEMENT_ID',
+                'NAME' => 'ELEMENT.NAME',
+                'PROCEDURA_ID',
+            ]
+        ])->fetch();
+    
+        $proceduresAll = \Bitrix\Iblock\Elements\ElementProcTable::query()
+            ->addSelect('NAME')
+            ->addSelect('ID')
+            ->fetchCollection();
+    
+        $proceduraList = [];
+        foreach($proceduresAll as $procedura){
+            $proceduraList[$procedura->getId()] = $procedura->getName();
+        }
+    
         $strResult = '';
-        $strResult = '<a ' . ($arSettings["_BLANK"] == 'Y' ? 'target="_blank"' : '') . ' href="' . trim($arValue['VALUE']) . '">' . (trim($arValue['DESCRIPTION']) ? trim($arValue['DESCRIPTION']) : trim($arValue['VALUE'])) . '</a>';
+        if ($docs && isset($docs['PROCEDURA_ID'])) {
+            foreach($docs['PROCEDURA_ID'] as $procId) {
+                $strResult .= $proceduraList[$procId] . '<br>';
+            }
+        }
+    
         return $strResult;
     }
 
