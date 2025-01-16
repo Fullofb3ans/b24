@@ -6,64 +6,77 @@ use Models\Lists\DocsPropertyValuesTable as DocsTable;
 class IBreserve
 {
     private static function printProcedures($arProperty){
-            $docs = DocsTable::getList([      
-                'select' => [
-                    'ID' => 'IBLOCK_ELEMENT_ID',
-                    'NAME' => 'ELEMENT.NAME',
-                    'PROCEDURA_ID',
-                ],
-                    'filter' => [
-                        'IBLOCK_ELEMENT_ID' => $arProperty['ELEMENT_ID']
-                    ]
-            ])->fetch();
-        
-            $proceduresAll = \Bitrix\Iblock\Elements\ElementProcTable::query()
-                ->addSelect('NAME')
-                ->addSelect('ID')
-                ->fetchCollection();
-        
-            $proceduraList = [];
-            foreach($proceduresAll as $procedura){
-                $proceduraList[$procedura->getId()] = $procedura->getName();
+        $docs = DocsTable::getList([      
+            'select' => [
+                'ID' => 'IBLOCK_ELEMENT_ID',
+                'NAME' => 'ELEMENT.NAME',
+                'PROCEDURA_ID',
+            ],
+                'filter' => [
+                    'IBLOCK_ELEMENT_ID' => $arProperty['ELEMENT_ID']
+                ]
+        ])->fetch();
+    
+        $proceduresAll = \Bitrix\Iblock\Elements\ElementProcTable::query()
+            ->addSelect('NAME')
+            ->addSelect('ID')
+            ->fetchCollection();
+    
+        $proceduraList = [];
+        foreach($proceduresAll as $procedura){
+            $proceduraList[$procedura->getId()] = $procedura->getName();
+        }
+    
+        $strResult = '<div class="procedures-text">';
+        if ($docs && isset($docs['PROCEDURA_ID'])) {
+            foreach($docs['PROCEDURA_ID'] as $procId) {
+                $popupContent = '<div class="popup-content">
+                        <div>Процедура: ' . htmlspecialchars($proceduraList[$procId]) . '</div>
+                        <div style="margin-top: 20px;">
+                            <input type="text" id="name_'.$procId.'" placeholder="ФИО" style="width: 100%; margin-bottom: 10px;">
+                            <input type="datetime-local" id="time_'.$procId.'" style="width: 100%; margin-bottom: 10px;">
+                            <button onclick="addReservation('.$procId.')" class="ui-btn ui-btn-primary">Добавить</button>
+                        </div>
+                    </div>';
+                    
+                $strResult .= '<span class="procedure-link" id="proc_'.$procId.'" onclick="BX.PopupWindowManager.create(\'popup-'.$procId.'\', this, {
+                    content: ('.$popupContent.'),
+                    width: 400,
+                    height: 200,
+                    zIndex: 100,
+                    closeIcon: true,
+                    titleBar: \'Запись на процедуру\',
+                    closeByEsc: true
+                }).show();">' 
+                          . $proceduraList[$procId] . '</span><br>';
             }
-        
-            $strResult = '<div class="procedures-text">';
-            if ($docs && isset($docs['PROCEDURA_ID'])) {
-                foreach($docs['PROCEDURA_ID'] as $procId) {
-                    $strResult .= '<span class="procedure-link" id="proc_'.$procId.'" onclick="BX.PopupWindowManager.create(\'popup-'.$procId.'\', this, {
-                        content: \'<div class="popup-content">
-            <div>Процедура: ' . htmlspecialchars($proceduraList[$procId]) . '</div>
-            <div style="margin-top: 20px;">
-                <input type="text" id="name_'.$procId.'" placeholder="ФИО" style="width: 100%; margin-bottom: 10px;">
-                <input type="datetime-local" id="time_'.$procId.'" style="width: 100%; margin-bottom: 10px;">
-                <button onclick="addReservation('.$procId.')" class="ui-btn ui-btn-primary">Добавить</button>
-            </div>
-        </div>\',
-                        width: 400,
-                        height: 200,
-                        zIndex: 100,
-                        closeIcon: true,
-                        titleBar: \'Запись на процедуру\',
-                        closeByEsc: true
-                    }).show();">' 
-                              . $proceduraList[$procId] . '</span><br>';
+        }
+        $strResult .= '</div>';
+    
+        $strResult .= '
+        <script>
+            function addReservation(procId) {
+                var name = document.getElementById("name_" + procId).value;
+                var time = document.getElementById("time_" + procId).value;
+                if(name && time) {
+                    alert("Данные записи:\nФИО: " + name + "\nВремя: " + time);
+                } else {
+                    alert("Заполните все поля");
                 }
             }
-            $strResult .= '</div>';
-        
-            $strResult .= '
-            <style>
-                .procedure-link {
-                    cursor: pointer;
-                    color: #2067b0;
-                    text-decoration: underline;
-                }
-                .procedure-link:hover {
-                    text-decoration: none;
-                }
-            </style>';
-        
-            return $strResult;
+        </script>
+        <style>
+            .procedure-link {
+                cursor: pointer;
+                color: #2067b0;
+                text-decoration: underline;
+            }
+            .procedure-link:hover {
+                text-decoration: none;
+            }
+        </style>';
+    
+        return $strResult;
     }
     
         
