@@ -40,7 +40,7 @@ class IBreserve
                 </div>';
                 
                 $strResult .= '<span class="procedure-link" id="proc_'.$procId.'" onclick="BX.PopupWindowManager.create(\'popup-'.$procId.'\', this, {
-                    content: \''.$popupContent.'\',
+                    content: ('.$popupContent.'),
                     width: 400,
                     height: 200,
                     zIndex: 100,
