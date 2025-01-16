@@ -71,9 +71,7 @@ class IBreserve
 
     public static function GetPropertyFieldHtml($arProperty, $arValue, $strHTMLControlName)
     {
-        use Models\Lists\DocsPropertyValuesTable as DocsTable;
     
-        // Get doctor ID from current list element
         $doctorId = $arProperty['IBLOCK_ELEMENT_ID'];
     
         $docs = DocsTable::getList([      
