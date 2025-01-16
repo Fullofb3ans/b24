@@ -39,7 +39,7 @@ class IBreserve
                             <input type="datetime-local" id="time_'.$procId.'" style="width: 100%; margin-bottom: 10px;">
                             <button onclick="addReservation('.$procId.')" class="ui-btn ui-btn-primary">Добавить</button>
                         </div>
-                    </div>`,
+                    </div>,
                     width: 400,
                     height: 200,
                     zIndex: 100,
