@@ -72,8 +72,6 @@ class IBreserve
     public static function GetPropertyFieldHtml($arProperty, $arValue, $strHTMLControlName)
     {
     
-        $doctorId = $arProperty['IBLOCK_ELEMENT_ID'];
-    
         $docs = DocsTable::getList([      
             'select' => [
                 'ID' => 'IBLOCK_ELEMENT_ID',
@@ -81,7 +79,7 @@ class IBreserve
                 'PROCEDURA_ID',
             ],
             'filter' => [
-                'IBLOCK_ELEMENT_ID' => $doctorId
+                'IBLOCK_ELEMENT_ID' => $arProperty['ELEMENT_ID']
             ]
         ])->fetch();
     
@@ -96,10 +94,8 @@ class IBreserve
         }
     
         $strResult = '<div class="procedures-text">';
-        if ($docs && isset($docs['PROCEDURA_ID'])) {
-            foreach($docs['PROCEDURA_ID'] as $procId) {
-                $strResult .= $proceduraList[$procId] . '<br>';
-            }
+        foreach($docs['PROCEDURA_ID'] as $procId) {
+            $strResult .= $proceduraList[$procId] . '<br>';
         }
         $strResult .= '</div>';
     
