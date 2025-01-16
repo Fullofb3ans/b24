@@ -27,30 +27,24 @@ class IBreserve
             $proceduraList[$procedura->getId()] = $procedura->getName();
         }
     
-        $strResult = '';
+        $strResult = '<div class="procedures-text">';
         if ($docs && isset($docs['PROCEDURA_ID'])) {
             foreach($docs['PROCEDURA_ID'] as $procId) {
-                $strResult .= $proceduraList[$procId] . '<br>';
+                $strResult .= '<span class="procedure-link" id="proc_'.$procId.'" onclick="BX.PopupWindowManager.create(\'popup-'.$procId.'\', this, {
+                    content: \'Процедура: ' . $proceduraList[$procId] . '\',
+                    width: 400,
+                    height: 100,
+                    zIndex: 100,
+                    closeIcon: true,
+                    titleBar: \'Детали процедуры\',
+                    closeByEsc: true
+                }).show();">' 
+                          . $proceduraList[$procId] . '</span><br>';
             }
         }
-    
         $strResult .= '</div>';
-
+    
         $strResult .= '
-        <script>
-            function showProcedurePopup(procId) {
-                var popup = new BX.PopupWindow("procedure-popup-" + procId, null, {
-                    content: "Информация о процедуре " + procId,
-                    width: 400,
-                    height: 200,
-                    zIndex: 100,
-                    closeIcon: {right: "10px", top: "10px"},
-                    titleBar: "Детали процедуры",
-                    closeByEsc: true
-                });
-                popup.show();
-            }
-        </script>
         <style>
             .procedure-link {
                 cursor: pointer;
@@ -61,7 +55,7 @@ class IBreserve
                 text-decoration: none;
             }
         </style>';
-
+    
         return $strResult;
     }
     
