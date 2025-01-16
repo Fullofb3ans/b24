@@ -63,8 +63,6 @@ class IBreserve
     let time = document.getElementById("time_" + procId).value;
     let procName = document.getElementById("proc_" + procId).textContent;
 
-    let dateObj = new Date(time);
-
  if(name && time) {
         BX.ajax.post(
             "/local/tools/lists/add_element_to_reserve.php",
@@ -73,7 +71,7 @@ class IBreserve
                 fields: {
                     NAME: name,
                     FIO_RESERVE: name,
-                    DATE_RESERVE: dateObj,
+                    DATE_RESERVE: time,
                     PROTSEDURA_RESERVE: procName
                 }
             },
