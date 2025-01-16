@@ -28,6 +28,14 @@ $eventManager->AddEventHandler(
         'GetUserTypeDescription'
     ]
 );
+$eventManager->AddEventHandler(
+    'iblock',
+    'OnIBlockPropertyBuildList',
+    [
+        'UserTypes\IBreserve',
+        'GetUserTypeDescription'
+    ]
+);
 
 // пользовательский тип для UF поля
 $eventManager->AddEventHandler(
