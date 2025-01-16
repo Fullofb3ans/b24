@@ -11,10 +11,10 @@ class IBreserve
             'ID' => 'IBLOCK_ELEMENT_ID',
             'NAME' => 'ELEMENT.NAME',
             'PROCEDURA_ID',
+        ],
             'filter' => [
                 'IBLOCK_ELEMENT_ID' => $arProperty['ELEMENT_ID']
             ]
-        ]
     ])->fetch();
 
     $proceduresAll = \Bitrix\Iblock\Elements\ElementProcTable::query()
