@@ -38,6 +38,9 @@ class IBreserve
                 'ID' => 'IBLOCK_ELEMENT_ID',
                 'NAME' => 'ELEMENT.NAME',
                 'PROCEDURA_ID',
+            ],
+            'filter' => [
+                'IBLOCK_ELEMENT_ID' => $arProperty['ELEMENT_ID']
             ]
         ])->fetch();
     
@@ -51,12 +54,11 @@ class IBreserve
             $proceduraList[$procedura->getId()] = $procedura->getName();
         }
     
-        $strResult = '';
-        if ($docs && isset($docs['PROCEDURA_ID'])) {
-            foreach($docs['PROCEDURA_ID'] as $procId) {
-                $strResult .= $proceduraList[$procId] . '<br>';
-            }
+        $strResult = '<div class="procedures-text">';
+        foreach($docs['PROCEDURA_ID'] as $procId) {
+            $strResult .= $proceduraList[$procId] . '<br>';
         }
+        $strResult .= '</div>';
     
         return $strResult;
     }
