@@ -30,13 +30,25 @@ class IBreserve
         $strResult = '<div class="procedures-text">';
         if ($docs && isset($docs['PROCEDURA_ID'])) {
             foreach($docs['PROCEDURA_ID'] as $procId) {
+                $popupContent = '
+                    <div>Процедура: ' . $proceduraList[$procId] . '</div>
+                    <div style="margin-top: 20px;">
+                        <div style="margin-bottom: 10px;">
+                            <input type="text" id="name_'.$procId.'" placeholder="ФИО" style="width: 100%; margin-bottom: 10px;">
+                            <input type="datetime-local" id="time_'.$procId.'" style="width: 100%;">
+                        </div>
+                        <button onclick="addReservation('.$procId.')" class="ui-btn ui-btn-primary">
+                            Добавить
+                        </button>
+                    </div>';
+                
                 $strResult .= '<span class="procedure-link" id="proc_'.$procId.'" onclick="BX.PopupWindowManager.create(\'popup-'.$procId.'\', this, {
-                    content: \'Процедура: ' . $proceduraList[$procId] . '\',
+                    content: \''.$popupContent.'\',
                     width: 400,
-                    height: 100,
+                    height: 200,
                     zIndex: 100,
                     closeIcon: true,
-                    titleBar: \'Детали процедуры\',
+                    titleBar: \'Запись на процедуру\',
                     closeByEsc: true
                 }).show();">' 
                           . $proceduraList[$procId] . '</span><br>';
@@ -45,6 +57,18 @@ class IBreserve
         $strResult .= '</div>';
     
         $strResult .= '
+        <script>
+            function addReservation(procId) {
+                var name = document.getElementById("name_" + procId).value;
+                var time = document.getElementById("time_" + procId).value;
+                if(name && time) {
+                    alert("Данные записи:\\nФИО: " + name + "\\nВремя: " + time);
+                    // Add your reservation logic here
+                } else {
+                    alert("Заполните все поля");
+                }
+            }
+        </script>
         <style>
             .procedure-link {
                 cursor: pointer;
