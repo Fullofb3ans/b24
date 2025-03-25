@@ -29,8 +29,8 @@ BX.ready(function () {
                 });
 
                 BX.bind(BX('confirm-workday'), 'click', function () {
-                    BX.ajax.runAction('timeman.api.native.start');
                     popup.close();
+                    BXTIMEMAN.Open();
                 });
             }
 
