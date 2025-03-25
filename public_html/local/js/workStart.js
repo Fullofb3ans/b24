@@ -29,7 +29,7 @@ BX.ready(function () {
 
             BX.bind(BX('confirm-workday'), 'click', function () {
                 popup.close();
-                document.querySelector('.tm-popup-button-handler').click();
+                startButton.click();
             });
 
             return false;
