@@ -6,6 +6,9 @@ BX.ready(function () {
     document.addEventListener('click', function (e) {
         const timemanButton = e.target.closest('.timeman-wrap');
 
+        const startButton = document.querySelector('.timeman-start-button');
+
+
         if (timemanButton) {
             e.preventDefault();
             e.stopPropagation();
