@@ -15,7 +15,11 @@ function pr($var, $type = false) {
     echo '</pre>';
 }
 
+use Bitrix\Main\Page\Asset;
 use Bitrix\Main\EventManager;
+
+// подключаю скрипт на начало дня
+Asset::getInstance()->addJs('/local/js/workStart.js');
 
 $eventManager = EventManager::getInstance();
 
@@ -46,7 +50,6 @@ $eventManager->AddEventHandler(
         'GetUserTypeDescription'
     ]
 );
-// подключаю скрипт на начало дня
-\Bitrix\Main\Page\Asset::getInstance()->addJs('/local/js/workday.js');
+
 
 
