@@ -1,5 +1,6 @@
 BX.ready(function () {
     BX.addCustomEvent('onPullEvent-timeman', function (command, params) {
+        console.log(command)
         if (command === 'start_day') {
             var popup = new BX.PopupWindow("workday-popup", null, {
                 content: `
