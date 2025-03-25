@@ -5,7 +5,7 @@ BX.ready(function () {
 
     // Try direct binding to the timeman button
     BX.bind(document, 'click', function (e) {
-        if (e.target.classList.contains('timeman-stafftrack-check-in-text')) {
+        if (e.target.classList.contains('timeman-background')) {
             console.log('Timer button clicked');
 
             var popup = new BX.PopupWindow("workday-popup", null, {
