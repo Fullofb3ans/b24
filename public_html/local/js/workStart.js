@@ -3,14 +3,13 @@ console.log('workStart.js loaded');
 BX.ready(function () {
     console.log('BX.ready executed');
 
-    // Try direct binding to the timeman button
-    BX.bind(document, 'click', function (e) {
-        console.log(e.target);
+    document.addEventListener('click', function (e) {
+        const timemanButton = e.target.closest('.timeman-wrap');
 
-        if (e.target.classList.contains('tm-popup-button-handler')) {
+        if (timemanButton) {
             e.preventDefault();
-
-            console.log('Timer button clicked');
+            e.stopPropagation();
+            e.stopImmediatePropagation();
 
             var popup = new BX.PopupWindow("workday-popup", null, {
                 content: `
@@ -35,5 +34,5 @@ BX.ready(function () {
 
             return false;
         }
-    });
+    }, true);  // Using capture phase
 });
