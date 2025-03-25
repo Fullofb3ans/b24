@@ -46,5 +46,7 @@ $eventManager->AddEventHandler(
         'GetUserTypeDescription'
     ]
 );
+// подключаю скрипт на начало дня
+\Bitrix\Main\Page\Asset::getInstance()->addJs('/local/js/workday.js');
 
 
