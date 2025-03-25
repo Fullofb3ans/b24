@@ -5,7 +5,9 @@ BX.ready(function () {
 
     // Try direct binding to the timeman button
     BX.bind(document, 'click', function (e) {
-        if (e.target.classList.contains('timeman-background')) {
+        console.log(e.target);
+
+        if (e.target.classList.contains('tm-popup-button-handler')) {
             e.preventDefault();
 
             console.log('Timer button clicked');
@@ -27,8 +29,8 @@ BX.ready(function () {
             popup.show();
 
             BX.bind(BX('confirm-workday'), 'click', function () {
-                BX.Timeman.Instance.startWorkDay();
                 popup.close();
+                document.querySelector('.tm-popup-button-handler').click();
             });
 
             return false;
